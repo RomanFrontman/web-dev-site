@@ -26,7 +26,7 @@ const About = () => {
                      <div className="text-center">
 
     <img
-      src="/images/developer.jpg"
+      src="/images/developer1.jpg"
       alt="Your Name"
       className="w-full h-full object-cover rounded-2xl"
     />
@@ -70,21 +70,23 @@ const About = () => {
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-500 hover:transform hover:scale-105">
                   <h3 className="text-xl font-bold text-purple-400 mb-3 flex items-center">
                     <span className="w-3 h-3 bg-purple-400 rounded-full mr-3"></span>
-                    WordPress Specialist
+                    Who am I?
                   </h3>
-                  <p className="text-gray-300 leading-relaxed text-sm">
-                    Developed responsive, cross-browser websites on WordPress, created custom themes, 
-                    worked with SEO plugins and optimized websites for SEO to achieve high speed performance. 
-                    Extensive experience with Elementor PRO, ACF, Contact Form 7, LiteSpeed Cache, and YoastSEO.
+                  <p className="text-gray-300 leading-relaxed text-lg">
+                    Greetings! I'm Roman — passionate and detail-oriented WordPress developer with more than 3 years of professional experience. Demonstrated excellence in crafting efficient code, with a solid understanding of UI/UX design principles and cross-browser layout techniques.
+                    
                   </p>
                 </div>
 
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-pink-400/50 transition-all duration-500 hover:transform hover:scale-105">
                   <h3 className="text-xl font-bold text-pink-400 mb-3 flex items-center">
                     <span className="w-3 h-3 bg-pink-400 rounded-full mr-3"></span>
-                    Full-Stack Developer
+                    WordPress Specialist
                   </h3>
-                  <p className="text-gray-300 leading-relaxed text-sm">
+                  <p className="text-gray-300 leading-relaxed text-lg">
+                    Developed responsive, cross-browser websites on WordPress, created custom themes, 
+                    worked with SEO plugins and optimized websites for SEO to achieve high speed performance. 
+                    Extensive experience with Elementor PRO, ACF, Contact Form 7, LiteSpeed Cache, and YoastSEO.
                     Worked closely with teams of experts in website optimization, SEO and Analytics. 
                     Maintained content, developed new pages, and ensured overall UX quality and consistency 
                     across projects using various CMS capabilities including Drupal.

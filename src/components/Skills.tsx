@@ -15,7 +15,7 @@ const Skills = () => {
   const tools = [
     { name: 'Git', icon: '🔧' },
     { name: 'Docker', icon: '🐳' },
-    { name: 'AWS', icon: '☁️' },
+    { name: 'Vercel', icon: '▲', color: 'hover:text-white' },
     { name: 'Figma', icon: '🎨' },
     { name: 'Gulp', icon: '📦' },
     { name: 'Sass', icon: '💅' }
@@ -93,7 +93,7 @@ const Skills = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                    <span className="text-gray-300">React.js & Next.js Applications</span>
+                    <span className="text-gray-300">Responsive, cross-browser websites on React.js</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
