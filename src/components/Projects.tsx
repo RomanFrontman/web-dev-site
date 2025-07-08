@@ -3,59 +3,60 @@ import { useState } from 'react';
 const Projects = () => {
   const [showMore, setShowMore] = useState(false);
 
-  const mainProjects = [
-    {
-      title: 'E-Commerce Platform',
-      description: 'A modern online store built with React, Tailwind, and Stripe integration.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop',
-      link: '#',
-      tech: ['React', 'Stripe', 'Node.js'],
-      category: 'Full-Stack'
-    },
-    {
-      title: 'Portfolio Website',
-      description: 'Clean personal portfolio for a designer with animations and dark mode.',
-      image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop',
-      link: '#',
-      tech: ['React', 'Framer Motion', 'Tailwind'],
-      category: 'Frontend'
-    },
-    {
-      title: 'SaaS Dashboard',
-      description: 'Custom admin dashboard with real-time analytics and user management.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
-      link: '#',
-      tech: ['React', 'Chart.js', 'Firebase'],
-      category: 'Dashboard'
-    }
-  ];
+const mainProjects = [
+  {
+    title: 'Corporative Website',
+    description: 'Professional corporate website built with WordPress using ACF and Elementor. Includes SEO optimization and custom theme setup.',
+    image: '/images/portfolio2.png',
+    link: 'https://www.connectivetechnologies.co.uk/',
+    tech: ['WordPress', 'Elementor', 'ACF', 'SEO'],
+    category: 'Corporate'
+  },
+  {
+    title: 'Portfolio Website',
+    description: 'Clean personal portfolio for a designer with animations and dark mode.',
+    image: '/images/portfolio1.png',
+    link: 'https://web-dev-site-eta.vercel.app/',
+    tech: ['React', 'Vercel', 'Tailwind'],
+    category: 'Frontend'
+  },
+  {
+    title: 'Cleaning Service Website',
+    description: 'Multi-page WordPress website for a cleaning company with service pages, SEO settings, and ACF + Elementor integration.',
+    image: '/images/portfolio3.png',
+    link: 'https://clean-clin.lviv.ua/',
+    tech: ['WordPress', 'ACF', 'Elementor', 'SEO'],
+    category: 'Service'
+  }
+];
 
-  const additionalProjects = [
-    {
-      title: 'WordPress Travel Blog',
-      description: 'Custom WordPress theme with booking system and interactive maps.',
-      image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop',
-      link: '#',
-      tech: ['WordPress', 'PHP', 'MySQL'],
-      category: 'WordPress'
-    },
-    {
-      title: 'Real Estate Platform',
-      description: 'Property listing platform with advanced search and virtual tours.',
-      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop',
-      link: '#',
-      tech: ['Next.js', 'MongoDB', 'AWS'],
-      category: 'Full-Stack'
-    },
-    {
-      title: 'Restaurant Management',
-      description: 'Complete restaurant management system with POS and inventory.',
-      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop',
-      link: '#',
-      tech: ['React', 'Node.js', 'PostgreSQL'],
-      category: 'Enterprise'
-    }
-  ];
+const additionalProjects = [
+  {
+    title: 'Financial Literacy Landing Page',
+    description: 'Single-page landing for online finance courses built with Bootstrap, JavaScript, and SCSS.',
+    image: '/images/portfolio4.png',
+    link: '#contact',
+    tech: ['Bootstrap', 'JavaScript', 'SCSS'],
+    category: 'Landing'
+  },
+  {
+    title: 'Real Estate Platform',
+    description: 'Property sales platform built with WordPress, SCSS, ACF, and custom filtering features.',
+    image: '/images/portfolio5.png',
+    link: 'https://www.romanchaus.pp.ua/',
+    tech: ['WordPress', 'ACF', 'SCSS', 'Custom Plugins'],
+    category: 'Real Estate'
+  },
+  {
+    title: 'Veterinary Clinic Website',
+    description: 'WordPress site for a veterinary clinic offering pet care. Includes personal account system, ACF, and Elementor.',
+    image: '/images/portfolio6.png',
+    link: 'https://merlion.com.ua/',
+    tech: ['WordPress', 'Elementor', 'ACF', 'User Dashboard'],
+    category: 'Healthcare'
+  }
+];
+
 
   const allProjects = showMore ? [...mainProjects, ...additionalProjects] : mainProjects;
 
@@ -101,10 +102,10 @@ const Projects = () => {
                 </div>
                 
                 {/* Hover View Button */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="px-6 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-white font-semibold hover:bg-white/30 transition-colors duration-300">
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <a href={project.link} className="px-6 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-white font-semibold hover:bg-white/30 transition-colors duration-300">
                     View Project
-                  </button>
+                  </a>
                 </div>
               </div>
 

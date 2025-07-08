@@ -19,7 +19,7 @@ const Contact = () => {
           <div className="space-y-6 text-gray-300">
             <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10">
               <h4 className="text-xl font-semibold text-purple-400 mb-2">Email</h4>
-              <p>hello@webdevpro.ca</p>
+              <p>hello@webdevpro.com</p>
             </div>
             <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10">
               <h4 className="text-xl font-semibold text-pink-400 mb-2">Phone</h4>
@@ -27,7 +27,7 @@ const Contact = () => {
             </div>
             <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10">
               <h4 className="text-xl font-semibold text-blue-400 mb-2">Location</h4>
-              <p>Toronto, Canada</p>
+              <p>Lviv, Ukraine</p>
             </div>
           </div>
 
