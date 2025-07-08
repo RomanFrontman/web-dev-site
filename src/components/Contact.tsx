@@ -32,10 +32,13 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <form className="bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10 space-y-6">
+          <form className="bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10 space-y-6"  action="https://formsubmit.co/roman1997lviv@gmail.com"
+  method="POST">
             <div>
-              <label className="block text-sm text-gray-300 mb-2">Your Name</label>
+              <label htmlFor="name" className="block text-sm text-gray-300 mb-2">Your Name</label>
               <input
+                id="name"
+                name="name"
                 type="text"
                 placeholder="John Doe"
                 className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -44,14 +47,25 @@ const Contact = () => {
             <div>
               <label className="block text-sm text-gray-300 mb-2">Your Email</label>
               <input
+                id="email"
+                name="email"
                 type="email"
                 placeholder="you@example.com"
+                required
                 className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
+            <input type="hidden" name="_captcha" value="false" />
+<input type="hidden" name="_template" value="box" />
+<input type="hidden" name="_next" value="https://yourwebsite.com/thank-you" />
+<input type="hidden" name="_honey" style={{ display: "none" }} />
+
+
             <div>
               <label className="block text-sm text-gray-300 mb-2">Message</label>
               <textarea
+              id="message"
+              name="message"
                 rows={5}
                 placeholder="Tell us about your project..."
                 className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
