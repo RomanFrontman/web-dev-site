@@ -12,7 +12,6 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import CookiesPolicy from './pages/CookiesPolicy';
 
-
 function App() {
   return (
     <Routes>

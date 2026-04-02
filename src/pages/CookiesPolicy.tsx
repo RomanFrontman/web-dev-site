@@ -2,7 +2,7 @@
 const CookiesPolicy = () => {
   return (
     <section className="min-h-screen py-20 px-6 max-w-4xl mx-auto text-gray-600 dark:text-gray-300">
-      <h1 className="text-5xl font-bold text-purple-400 mb-10 text-center">Cookies Policy</h1>
+      <h1 className="text-5xl font-bold text-purple-400 mt-10 mb-10">Cookies Policy</h1>
       <div className="space-y-8 text-base md:text-lg leading-relaxed">
 
         <p>

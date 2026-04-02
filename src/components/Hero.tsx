@@ -15,7 +15,11 @@ const Hero = () => {
           <Smartphone className="h-12 w-12 text-pink-400 animate-bounce delay-300" />
           <Globe className="h-12 w-12 text-blue-400 animate-bounce delay-500" />
         </div>
-        <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
+        <h1 className="text-6xl md:text-8xl font-bold mb-6 
+  bg-gradient-to-r 
+  from-purple-400 via-pink-800 to-blue-800 
+  dark:from-purple-300 dark:via-pink-300 dark:to-blue-300
+  bg-clip-text text-transparent animate-pulse">
           Full-Stack Developer
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">

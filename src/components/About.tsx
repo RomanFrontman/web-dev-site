@@ -46,7 +46,7 @@ const About = () => {
                       <div className="text-gray-500 dark:text-gray-300 text-sm">Projects</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-pink-400 mb-1">  <AnimatedCounter target={3} />+</div>
+                      <div className="text-2xl font-bold text-pink-400 mb-1">  <AnimatedCounter target={4} />+</div>
                       <div className="text-gray-500 dark:text-gray-300 text-sm">Years</div>
                     </div>
                     <div className="text-center">
@@ -73,7 +73,7 @@ const About = () => {
                     Who am I?
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                    Greetings! I'm Roman — passionate and detail-oriented WordPress developer with more than 3 years of professional experience. Demonstrated excellence in crafting efficient code, with a solid understanding of UI/UX design principles and cross-browser layout techniques.
+                    Greetings! I'm Roman — passionate and detail-oriented WordPress developer with more than 4 years of professional experience. Demonstrated excellence in crafting efficient code, with a solid understanding of UI/UX design principles and cross-browser layout techniques.
                     
                   </p>
                 </div>
@@ -148,7 +148,7 @@ const About = () => {
                   ].map((plugin, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-medium border border-purple-500/30 hover:bg-purple-500/30 transition-colors duration-300"
+                      className="px-3 py-1 bg-purple-500/20 text rounded-full text-xs font-medium border border-purple-500/30 hover:bg-purple-500/30 transition-colors duration-300"
                     >
                       {plugin}
                     </span>
