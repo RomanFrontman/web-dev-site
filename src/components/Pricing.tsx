@@ -29,7 +29,7 @@ const Pricing = () => {
                     <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                         Pricing Plans
                     </h2>
-                    <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                    <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                         Choose the plan that fits your needs. Transparent pricing. No hidden fees.
                     </p>
                     <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-blue-400 mx-auto rounded-full mt-6"></div>
@@ -39,13 +39,13 @@ const Pricing = () => {
                     {plans.map((plan) => (
                         <div
                             key={plan.name}
-                            className={`bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 hover:scale-105 transition-transform duration-300 hover:shadow-xl`}
+                            className={`bg-[var(--bg-surface)] backdrop-blur-md border border-[oklch(90%_0.012_349)] dark:border-white/10 rounded-3xl p-8 hover:scale-105 transition-transform duration-300 hover:shadow-xl`}
                         >
-                            <div className={`text-3xl font-bold text-white mb-4`}>{plan.name}</div>
+                            <div className={`text-3xl font-bold text-gray-900 dark:text-white mb-4`}>{plan.name}</div>
                             <div className={`text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${plan.gradient} mb-6`}>
                                 {plan.price}
                             </div>
-                            <ul className="space-y-3 text-gray-300 mb-8">
+                            <ul className="space-y-3 text-gray-600 dark:text-gray-300 mb-8">
                                 {plan.features.map((feature) => (
                                     <li key={feature} className="flex items-center space-x-2">
                                         <div className="w-2 h-2 bg-purple-400 rounded-full"></div>

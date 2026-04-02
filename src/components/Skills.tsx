@@ -23,7 +23,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-20 relative">
-      <div className="bg-gradient-to-br from-neutral-900/80 to-gray-700/60"></div>
+      <div className="bg-gradient-to-br from-neutral-50/80 to-gray-100/60 dark:from-neutral-900/80 dark:to-gray-700/60"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
@@ -31,7 +31,7 @@ const Skills = () => {
             <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Skills & Technologies
             </h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Constantly evolving and mastering the latest technologies to deliver cutting-edge solutions
             </p>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full mt-6"></div>
@@ -47,15 +47,15 @@ const Skills = () => {
 
               <div className="space-y-6">
                 {skills.map((skill) => (
-                  <div key={skill.name} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-400/50 transition-all duration-500">
+                  <div key={skill.name} className="bg-[var(--bg-surface)] backdrop-blur-sm rounded-xl p-6 border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 transition-all duration-500">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-3">
                         <span className="text-2xl">{skill.icon}</span>
-                        <span className="text-lg font-semibold text-white">{skill.name}</span>
+                        <span className="text-lg font-semibold text-gray-900 dark:text-white">{skill.name}</span>
                       </div>
                       <span className="text-purple-400 font-bold">{skill.level}%</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                    <div className="w-full bg-[oklch(90%_0.012_349)] dark:bg-gray-700 rounded-full h-3 overflow-hidden">
                       <div
                         className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out`}
                         style={{ width: `${skill.level}%` }}
@@ -76,32 +76,32 @@ const Skills = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 {tools.map((tool) => (
-                  <div key={tool.name} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-pink-400/50 transition-all duration-500 hover:transform hover:scale-105 text-center">
+                  <div key={tool.name} className="bg-[var(--bg-surface)] backdrop-blur-sm rounded-xl p-6 border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-pink-400/50 transition-all duration-500 hover:transform hover:scale-105 text-center">
                     <div className="text-4xl mb-3">{tool.icon}</div>
-                    <div className="text-lg font-semibold text-white">{tool.name}</div>
+                    <div className="text-lg font-semibold text-gray-900 dark:text-white">{tool.name}</div>
                   </div>
                 ))}
               </div>
 
               {/* Specializations */}
-              <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl p-8 border border-white/10">
+              <div className="bg-[var(--bg-subtle)] dark:bg-gradient-to-br dark:from-purple-500/10 dark:to-pink-500/10 rounded-2xl p-8 border border-[oklch(88%_0.014_349)] dark:border-white/10">
                 <h4 className="text-2xl font-bold text-purple-400 mb-6">Specializations</h4>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                    <span className="text-gray-300">Custom WordPress Development</span>
+                    <span className="text-gray-600 dark:text-gray-300">Custom WordPress Development</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                    <span className="text-gray-300">Responsive, cross-browser websites on React.js</span>
+                    <span className="text-gray-600 dark:text-gray-300">Responsive, cross-browser websites on React.js</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                    <span className="text-gray-300">E-commerce Solutions</span>
+                    <span className="text-gray-600 dark:text-gray-300">E-commerce Solutions</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="text-gray-300">API Development & Integration</span>
+                    <span className="text-gray-600 dark:text-gray-300">API Development & Integration</span>
                   </div>
                 </div>
               </div>

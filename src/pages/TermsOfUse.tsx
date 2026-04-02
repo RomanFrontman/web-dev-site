@@ -2,7 +2,7 @@
 
 const TermsOfUse = () => {
   return (
-    <section className="min-h-screen py-20 px-6 max-w-4xl mx-auto text-gray-300">
+    <section className="min-h-screen py-20 px-6 max-w-4xl mx-auto text-gray-600 dark:text-gray-300">
       <h1 className="text-4xl font-bold text-purple-400 mb-6 text-center">Terms of Use</h1>
       <div className="space-y-6 text-sm leading-relaxed">
 

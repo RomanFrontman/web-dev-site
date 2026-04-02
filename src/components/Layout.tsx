@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-950 via-black to-neutral-900 text-white">
+    <div className="min-h-screen bg-[var(--bg-base)] text-gray-900 dark:text-white">
       <Header />
       <main>
         <Outlet />

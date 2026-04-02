@@ -1,5 +1,31 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@supports (selector(:where(html))) {
+  html {
+    color-scheme: light dark;
+  }
+  
+  html.dark {
+    color-scheme: dark;
+  }
+}
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Background palette — same hue as accent colors (~349°), low chroma */
+:root {
+  --bg-base:    oklch(96% 0.008 349);   /* page background      */
+  --bg-subtle:  oklch(93% 0.014 349);   /* section / footer bg  */
+  --bg-surface: oklch(99% 0.004 349);   /* card / elevated bg   */
+  --bg-border:  oklch(90% 0.012 349);   /* light-mode border    */
+}
+
+.dark {
+  --bg-base:    oklch(13% 0.022 349);
+  --bg-subtle:  oklch(16% 0.025 349);
+  --bg-surface: oklch(19% 0.018 349);
+  --bg-border:  rgba(255,255,255,0.10);
 }

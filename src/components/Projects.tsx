@@ -73,7 +73,7 @@ const additionalProjects = [
           <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             My Projects
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             A selection of projects I've built for clients and personal growth.
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full mt-6"></div>
@@ -83,10 +83,10 @@ const additionalProjects = [
           {allProjects.map((project, index) => (
             <div
               key={index}
-              className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:border-purple-400/50 transition-all duration-500 hover:transform hover:scale-105"
+              className="group bg-[var(--bg-surface)] backdrop-blur-md border border-[oklch(90%_0.012_349)] dark:border-white/10 rounded-2xl overflow-hidden hover:border-purple-400/50 transition-all duration-500 hover:transform hover:scale-105"
             >
               {/* Image Container with Zoom Effect */}
-              <div className="relative overflow-hidden h-48 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
+              <div className="relative overflow-hidden h-48 bg-gradient-to-br from-purple-100/60 to-pink-100/60 dark:from-purple-900/20 dark:to-pink-900/20">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -111,10 +111,10 @@ const additionalProjects = [
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-400 transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-gray-300 mb-4 text-sm leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
                   {project.description}
                 </p>
                 
@@ -155,11 +155,11 @@ const additionalProjects = [
 
         {/* Additional Info */}
         <div className="mt-16 text-center">
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 max-w-3xl mx-auto">
+          <div className="bg-[var(--bg-surface)] backdrop-blur-sm rounded-2xl p-8 border border-[oklch(90%_0.012_349)] dark:border-white/10 max-w-3xl mx-auto">
             <h3 className="text-2xl font-bold text-purple-400 mb-4">
               Ready to Start Your Project?
             </h3>
-            <p className="text-gray-300 mb-6">
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               I'm always excited to work on new challenges and bring creative ideas to life. 
               Let's discuss how I can help you achieve your goals.
             </p>
