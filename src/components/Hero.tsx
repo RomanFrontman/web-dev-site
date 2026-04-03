@@ -1,4 +1,5 @@
 import { Monitor, Smartphone, Globe } from 'lucide-react';
+import Button from './Button';
 
 const Hero = () => {
   return (
@@ -26,12 +27,8 @@ const Hero = () => {
           Crafting exceptional digital experiences with <span className="text-purple-400 font-semibold">WordPress</span>, <span className="text-pink-400 font-semibold"> React</span>, and cutting-edge technologies
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href='#projects' className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-semibold hover:from-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25">
-            View My Work
-          </a>
-          <a href='#contact' className="px-8 py-4 border-2 border-purple-400 rounded-full text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300">
-            Get In Touch
-          </a>
+          <Button href="#projects" size="lg">View My Work</Button>
+          <Button href="#contact" variant="secondary" size="lg">Get In Touch</Button>
         </div>
       </div>
     </section>

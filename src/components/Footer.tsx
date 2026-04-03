@@ -1,4 +1,5 @@
 import { Github, Linkedin, Twitter, Instagram, Dribbble } from 'lucide-react';
+import Button from './Button';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -13,11 +14,11 @@ const Footer = () => {
 
 
   const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', href: '/#home' },
+    { name: 'About', href: '/#about' },
+    { name: 'Skills', href: '/#skills' },
+    { name: 'Projects', href: '/#projects' },
+    { name: 'Contact', href: '/#contact' }
   ];
 
   const services = [
@@ -121,9 +122,7 @@ const Footer = () => {
 
             {/* CTA Button */}
             <div className="pt-4">
-              <a href="#contact" className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-semibold hover:from-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25">
-                Start Your Project
-              </a>
+              <Button href="/#contact" className="w-full">Start Your Project</Button>
             </div>
           </div>
         </div>

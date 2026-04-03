@@ -6,6 +6,7 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
+import PriceCalculator from './components/PriceCalculator';
 import Contact from './components/Contact';
 
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -27,6 +28,7 @@ function App() {
               <Projects />
               <Pricing />
               <Testimonials />
+              <PriceCalculator />
               <Contact />
             </>
           }

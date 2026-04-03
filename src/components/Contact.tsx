@@ -1,6 +1,7 @@
 "use client";
 // src/components/Contact.tsx
 import { useState } from "react";
+import Button from "./Button";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -104,13 +105,14 @@ const Contact = () => {
                 className="w-full bg-[var(--bg-subtle)] dark:bg-black/20 border border-[oklch(90%_0.012_349)] dark:border-white/10 rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
               ></textarea>
             </div>
-            <button
+            <Button
               type="submit"
+              gradient="from-purple-500 to-blue-500"
               disabled={status === "loading"}
-              className="w-full py-3 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 rounded-lg text-white font-semibold transition"
+              className="w-full"
             >
               {status === "loading" ? "Sending…" : "Send Message"}
-            </button>
+            </Button>
             {status === "success" && (
               <p className="text-green-500 text-sm text-center">✅ Message sent! I'll get back to you soon.</p>
             )}

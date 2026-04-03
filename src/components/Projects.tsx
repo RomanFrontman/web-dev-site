@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from './Button';
 
 const Projects = () => {
   const [showMore, setShowMore] = useState(false);
@@ -148,12 +149,9 @@ const additionalProjects = [
 
         {/* View More Button */}
         <div className="text-center mt-12">
-          <button
-            onClick={() => setShowMore(!showMore)}
-            className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-semibold hover:from-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
-          >
+          <Button onClick={() => setShowMore(!showMore)} size="lg">
             {showMore ? 'Show Less' : 'View More Projects'}
-          </button>
+          </Button>
         </div>
 
         {/* Additional Info */}
@@ -167,12 +165,8 @@ const additionalProjects = [
               Let's discuss how I can help you achieve your goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href='#contact' className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300">
-                Get a Quote
-              </a>
-              <a href='#contact' className="px-6 py-3 border-2 border-purple-400 rounded-full text-purple-400 font-semibold hover:bg-purple-400 hover:text-white transition-all duration-300">
-                Schedule a Call
-              </a>
+              <Button href="#contact">Get a Quote</Button>
+              <Button href="#contact" variant="secondary">Schedule a Call</Button>
             </div>
           </div>
         </div>

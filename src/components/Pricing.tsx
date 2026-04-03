@@ -1,21 +1,22 @@
 // src/components/Pricing.tsx
+import Button from './Button';
 const plans = [
     {
         name: 'Starter',
-        price: '$199',
-        features: ['1 Page Website', 'Responsive Design', 'Basic SEO', 'Email Support'],
+        price: ' $380',
+        features: ['One-page landing page', 'Pre-made template', 'Application form', 'Standard deadline'],
         gradient: 'from-purple-500 to-pink-500',
     },
     {
-        name: 'Professional',
-        price: '$499',
-        features: ['Up to 5 Pages', 'Custom Design', 'SEO Optimization', 'Priority Support'],
+        name: 'Business ',
+        price: '$1,370',
+        features: ['Multi-page website', 'Semi-custom design', 'Basic admin panel', 'SEO optimization', 'Blog'],
         gradient: 'from-pink-500 to-blue-500',
     },
     {
-        name: 'Enterprise',
-        price: '$999',
-        features: ['Unlimited Pages', 'Full Customization', 'Advanced Integrations', '24/7 Support'],
+        name: 'Pro ',
+        price: '$2,850',
+        features: ['Corporate website', 'Fully custom UI/UX', 'Advanced admin panel', 'Telegram / WhatsApp integration', 'Multilingual', 'Animations', 'Accelerated deadline'],
         gradient: 'from-blue-500 to-green-500',
     },
 ];
@@ -53,12 +54,9 @@ const Pricing = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <a
-                                href="#contact"
-                                className={`block text-center w-full py-3 rounded-full font-semibold text-white bg-gradient-to-r ${plan.gradient} hover:opacity-90 transition`}
-                            >
+                            <Button href="#contact" gradient={plan.gradient} className="w-full">
                                 Choose Plan
-                            </a>
+                            </Button>
 
                         </div>
                     ))}
