@@ -10,7 +10,7 @@ const Hero = () => {
         <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
       <div className="relative z-10 text-center px-6 max-w-4xl">
-        <div className="flex items-center justify-center space-x-4 mb-8">
+        <div className="flex items-center justify-center space-x-4 mb-8" aria-hidden="true">
           <Monitor className="h-12 w-12 text-purple-400 animate-bounce" />
           <Smartphone className="h-12 w-12 text-pink-400 animate-bounce delay-300" />
           <Globe className="h-12 w-12 text-blue-400 animate-bounce delay-500" />

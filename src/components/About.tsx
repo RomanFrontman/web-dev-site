@@ -27,7 +27,9 @@ const About = () => {
 
     <img
       src="/images/developer1.jpg"
-      alt="Your Name"
+      alt="Roman Chaus — Full-Stack Developer"
+      width="400"
+      height="400"
       className="w-full h-full object-cover rounded-2xl"
     />
 

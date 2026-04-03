@@ -11,6 +11,7 @@ import Contact from './components/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import CookiesPolicy from './pages/CookiesPolicy';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="terms-of-use" element={<TermsOfUse />} /> 
         <Route path="/cookies-policy" element={<CookiesPolicy />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

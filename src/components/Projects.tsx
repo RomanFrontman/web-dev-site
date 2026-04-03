@@ -90,6 +90,9 @@ const additionalProjects = [
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  width="400"
+                  height="192"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 
