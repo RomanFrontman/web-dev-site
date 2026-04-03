@@ -1,8 +1,9 @@
 import AnimatedCounter from './AnimatedCounter';
+import AnimatedSection from './AnimatedSection';
 
 const About = () => {
   return (
-    <section id="about" className="py-20 relative overflow-hidden">
+    <AnimatedSection><section id="about" className="py-20 relative overflow-hidden">
      <div className="absolute inset-0 bg-gradient-to-r from-[oklch(96%_0.008_349)]/90 to-[oklch(93%_0.014_349)]/80 dark:from-black/60 dark:to-gray-800/60"></div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -161,7 +162,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section></AnimatedSection>
   );
 }
 

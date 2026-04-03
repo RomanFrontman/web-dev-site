@@ -2,6 +2,7 @@
 // src/components/Contact.tsx
 import { useState } from "react";
 import Button from "./Button";
+import AnimatedSection from "./AnimatedSection";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -32,7 +33,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 relative">
+    <AnimatedSection><section id="contact" className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10"></div>
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
@@ -122,7 +123,7 @@ const Contact = () => {
           </form>
         </div>
       </div>
-    </section>
+    </section></AnimatedSection>
   );
 };
 

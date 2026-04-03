@@ -2,6 +2,7 @@
 // src/components/PriceCalculator.tsx
 import { useState } from "react";
 import Button from "./Button";
+import AnimatedSection from "./AnimatedSection";
 
 type Step1Key = "landing" | "multipage" | "corporate";
 type Step2Key = "template" | "semicustom" | "fullcustom";
@@ -140,7 +141,7 @@ export default function PriceCalculator() {
     : "opacity-0 -translate-x-6";
 
   return (
-    <section id="price-calculator" className="py-20 relative">
+    <AnimatedSection><section id="price-calculator" className="py-20 relative">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10 pointer-events-none" />
       <div className="container mx-auto px-6 relative z-10">
         {/* Heading */}
@@ -264,7 +265,7 @@ export default function PriceCalculator() {
           </div>
         </div>
       </div>
-    </section>
+    </section></AnimatedSection>
   );
 }
 

@@ -1,9 +1,12 @@
+"use client";
 import { Monitor, Smartphone, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Button from './Button';
+import AnimatedSection from './AnimatedSection';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <AnimatedSection><section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-[oklch(96%_0.008_349)]/90 to-[oklch(93%_0.014_349)]/80 dark:from-black/60 dark:to-gray-800/60"></div>
 
       <div className="absolute inset-0">
@@ -16,22 +19,37 @@ const Hero = () => {
           <Smartphone className="h-12 w-12 text-pink-400 animate-bounce delay-300" />
           <Globe className="h-12 w-12 text-blue-400 animate-bounce delay-500" />
         </div>
-        <h1 className="text-6xl md:text-8xl font-bold mb-6 
-  bg-gradient-to-r 
-  from-purple-400 via-pink-800 to-blue-800 
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-6xl md:text-8xl font-bold mb-6
+  bg-gradient-to-r
+  from-purple-400 via-pink-800 to-blue-800
   dark:from-purple-300 dark:via-pink-300 dark:to-blue-300
-  bg-clip-text text-transparent animate-pulse">
+  bg-clip-text text-transparent animate-pulse"
+        >
           Full-Stack Developer
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+          className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+        >
           Crafting exceptional digital experiences with <span className="text-purple-400 font-semibold">WordPress</span>, <span className="text-pink-400 font-semibold"> React</span>, and cutting-edge technologies
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
           <Button href="#projects" size="lg">View My Work</Button>
           <Button href="#contact" variant="secondary" size="lg">Get In Touch</Button>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </section></AnimatedSection>
   );
 };
 

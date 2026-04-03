@@ -1,5 +1,8 @@
+"use client";
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Button from './Button';
+import AnimatedSection from './AnimatedSection';
 
 const Projects = () => {
   const [showMore, setShowMore] = useState(false);
@@ -61,8 +64,17 @@ const additionalProjects = [
 
   const allProjects = showMore ? [...mainProjects, ...additionalProjects] : mainProjects;
 
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.12 } },
+  };
+  const item = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
+
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
+    <AnimatedSection><section id="projects" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-pink-900/10"></div>
       
       {/* Floating background elements */}
@@ -80,10 +92,11 @@ const additionalProjects = [
           <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full mt-6"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={container} whileInView="show" initial="hidden" viewport={{ once: true, amount: 0.2 }}>
           {allProjects.map((project, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={item}
               className="group bg-[var(--bg-surface)] backdrop-blur-md border border-[oklch(90%_0.012_349)] dark:border-white/10 rounded-2xl overflow-hidden hover:border-purple-400/50 transition-all duration-500 hover:transform hover:scale-105"
             >
               {/* Image Container with Zoom Effect */}
@@ -143,9 +156,9 @@ const additionalProjects = [
                   <span className="transform group-hover/link:translate-x-1 transition-transform duration-300">→</span>
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* View More Button */}
         <div className="text-center mt-12">
@@ -171,8 +184,8 @@ const additionalProjects = [
           </div>
         </div>
       </div>
-    </section>
+    </section></AnimatedSection>
   );
-}  
+}
 
 export default Projects;

@@ -1,4 +1,7 @@
+"use client";
 import { Code, Monitor } from 'lucide-react';
+import { motion } from 'framer-motion';
+import AnimatedSection from './AnimatedSection';
 
 const Skills = () => {
   const skills = [
@@ -21,8 +24,17 @@ const Skills = () => {
     { name: 'Sass', icon: '💅' }
   ];
 
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.1 } },
+  };
+  const item = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
+
   return (
-    <section id="skills" className="py-20 relative">
+    <AnimatedSection><section id="skills" className="py-20 relative">
       <div className="bg-gradient-to-br from-neutral-50/80 to-gray-100/60 dark:from-neutral-900/80 dark:to-gray-700/60"></div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -45,9 +57,9 @@ const Skills = () => {
                 Programming Skills
               </h3>
 
-              <div className="space-y-6">
+              <motion.div className="space-y-6" variants={container} whileInView="show" initial="hidden" viewport={{ once: true, amount: 0.2 }}>
                 {skills.map((skill) => (
-                  <div key={skill.name} className="bg-[var(--bg-surface)] backdrop-blur-sm rounded-xl p-6 border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 transition-all duration-500">
+                  <motion.div key={skill.name} variants={item} className="bg-[var(--bg-surface)] backdrop-blur-sm rounded-xl p-6 border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 transition-all duration-500">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-3">
                         <span className="text-2xl">{skill.icon}</span>
@@ -61,9 +73,9 @@ const Skills = () => {
                         style={{ width: `${skill.level}%` }}
                       ></div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
             </div>
 
@@ -74,14 +86,14 @@ const Skills = () => {
                 Tools & Frameworks
               </h3>
 
-              <div className="grid grid-cols-2 gap-4">
+              <motion.div className="grid grid-cols-2 gap-4" variants={container} whileInView="show" initial="hidden" viewport={{ once: true, amount: 0.2 }}>
                 {tools.map((tool) => (
-                  <div key={tool.name} className="bg-[var(--bg-surface)] backdrop-blur-sm rounded-xl p-6 border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-pink-400/50 transition-all duration-500 hover:transform hover:scale-105 text-center">
+                  <motion.div key={tool.name} variants={item} className="bg-[var(--bg-surface)] backdrop-blur-sm rounded-xl p-6 border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-pink-400/50 transition-all duration-500 hover:transform hover:scale-105 text-center">
                     <div className="text-4xl mb-3">{tool.icon}</div>
                     <div className="text-lg font-semibold text-gray-900 dark:text-white">{tool.name}</div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
               {/* Specializations */}
               <div className="bg-[var(--bg-subtle)] dark:bg-gradient-to-br dark:from-purple-500/10 dark:to-pink-500/10 rounded-2xl p-8 border border-[oklch(88%_0.014_349)] dark:border-white/10">
@@ -109,7 +121,7 @@ const Skills = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section></AnimatedSection>
   );
 }
 
