@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Button from "./Button";
 import AnimatedSection from "./AnimatedSection";
+import { addMessage } from "../lib/db";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -23,6 +24,7 @@ const Contact = () => {
         body: JSON.stringify({ name, email, message, _captcha: "false", _template: "box" }),
       });
       if (res.ok) {
+        addMessage({ name, email, message }).catch(err => console.error('Failed to save message to Supabase:', err));
         setStatus("success");
       } else {
         setStatus("error");

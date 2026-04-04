@@ -1,0 +1,15 @@
+[
+  {"id": "1",  "name": "WordPress",   "level": 95, "category": "Programming", "icon": "🚀", "color": "from-blue-500 to-blue-600",    "order": 1},
+  {"id": "2",  "name": "React",       "level": 90, "category": "Programming", "icon": "⚛️", "color": "from-cyan-500 to-blue-500",    "order": 2},
+  {"id": "3",  "name": "JavaScript",  "level": 88, "category": "Programming", "icon": "🔥", "color": "from-yellow-400 to-yellow-500", "order": 3},
+  {"id": "4",  "name": "PHP",         "level": 85, "category": "Programming", "icon": "🐘", "color": "from-purple-500 to-purple-600", "order": 4},
+  {"id": "5",  "name": "MySQL",       "level": 85, "category": "Programming", "icon": "🗄️", "color": "from-orange-500 to-red-500",   "order": 5},
+  {"id": "6",  "name": "Tailwind CSS","level": 90, "category": "Programming", "icon": "🎨", "color": "from-teal-400 to-cyan-500",    "order": 6},
+  {"id": "7",  "name": "Bootstrap",   "level": 80, "category": "Programming", "icon": "📘", "color": "from-indigo-500 to-indigo-600","order": 7},
+  {"id": "8",  "name": "Git",         "level": 0,  "category": "Tool",        "icon": "🔧", "color": "from-gray-500 to-gray-600",    "order": 8},
+  {"id": "9",  "name": "Docker",      "level": 0,  "category": "Tool",        "icon": "🐳", "color": "from-blue-500 to-blue-600",    "order": 9},
+  {"id": "10", "name": "Vercel",      "level": 0,  "category": "Tool",        "icon": "▲",  "color": "from-gray-700 to-gray-900",    "order": 10},
+  {"id": "11", "name": "Figma",       "level": 0,  "category": "Tool",        "icon": "🎨", "color": "from-pink-500 to-purple-500",  "order": 11},
+  {"id": "12", "name": "Gulp",        "level": 0,  "category": "Tool",        "icon": "📦", "color": "from-red-500 to-red-600",      "order": 12},
+  {"id": "13", "name": "Sass",        "level": 0,  "category": "Tool",        "icon": "💅", "color": "from-pink-400 to-pink-600",    "order": 13}
+]
