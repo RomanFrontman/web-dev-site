@@ -9,6 +9,7 @@ const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [agreed, setAgreed] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -108,10 +109,27 @@ const Contact = () => {
                 className="w-full bg-[var(--bg-subtle)] dark:bg-black/20 border border-[oklch(90%_0.012_349)] dark:border-white/10 rounded-lg px-4 py-3 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
               ></textarea>
             </div>
+            <div className="flex items-start gap-3">
+              <input
+                id="privacy"
+                type="checkbox"
+                required
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-purple-500"
+              />
+              <label htmlFor="privacy" className="text-sm text-gray-600 dark:text-gray-400 leading-snug cursor-pointer">
+                I agree to the{" "}
+                <a href="/privacy-policy" target="_blank" className="text-purple-400 hover:text-pink-400 underline underline-offset-2 transition-colors duration-200">
+                  Privacy Policy
+                </a>{" "}
+                and consent to the processing of my personal data.
+              </label>
+            </div>
             <Button
               type="submit"
               gradient="from-purple-500 to-blue-500"
-              disabled={status === "loading"}
+              disabled={status === "loading" || !agreed}
               className="w-full"
             >
               {status === "loading" ? "Sending…" : "Send Message"}

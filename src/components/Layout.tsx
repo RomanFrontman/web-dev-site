@@ -1,6 +1,7 @@
 // src/components/Layout.tsx
 import Header from './Header';
 import Footer from './Footer';
+import CookieBanner from './CookieBanner';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
@@ -11,6 +12,7 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <CookieBanner />
     </div>
   );
 };
