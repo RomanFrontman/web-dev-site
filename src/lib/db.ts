@@ -1,6 +1,6 @@
 // src/lib/db.ts
 import { supabase } from './supabase';
-import type { Project, Skill, Message } from '../types/database';
+import type { Project, Skill, Message, Page } from '../types/database';
 
 // ── Projects ─────────────────────────────────────────────────
 
@@ -144,6 +144,63 @@ export async function setReadStatus(id: string, read: boolean): Promise<void> {
 export async function deleteMessage(id: string): Promise<void> {
   const { error } = await supabase
     .from('messages')
+    .delete()
+    .eq('id', id);
+  if (error) throw error;
+}
+
+// ── Pages ────────────────────────────────────────────────────
+
+export async function getPages(): Promise<Page[]> {
+  const { data, error } = await supabase
+    .from('pages')
+    .select('*')
+    .order('updated_at', { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function getPageBySlug(slug: string): Promise<Page | null> {
+  const { data, error } = await supabase
+    .from('pages')
+    .select('*')
+    .eq('slug', slug)
+    .eq('is_published', true)
+    .single();
+  if (error) {
+    if (error.code === 'PGRST116') return null; // no row found
+    throw error;
+  }
+  return data;
+}
+
+export async function addPage(
+  data: Omit<Page, 'id' | 'updated_at'>
+): Promise<Page> {
+  const { data: row, error } = await supabase
+    .from('pages')
+    .insert(data)
+    .select()
+    .single();
+  if (error) throw error;
+  return row;
+}
+
+export async function updatePage(
+  id: string,
+  data: Partial<Omit<Page, 'id' | 'updated_at'>>
+): Promise<void> {
+  // updated_at is set by a DB trigger — do not send it from the client.
+  const { error } = await supabase
+    .from('pages')
+    .update(data)
+    .eq('id', id);
+  if (error) throw error;
+}
+
+export async function deletePage(id: string): Promise<void> {
+  const { error } = await supabase
+    .from('pages')
     .delete()
     .eq('id', id);
   if (error) throw error;

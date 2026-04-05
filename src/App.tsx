@@ -12,6 +12,7 @@ import Contact from './components/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import CookiesPolicy from './pages/CookiesPolicy';
+import DynamicPage from './pages/DynamicPage';
 import NotFound from './pages/NotFound';
 
 import AdminRoute from './admin/AdminRoute';
@@ -21,6 +22,7 @@ import AdminDashboard from './admin/AdminDashboard';
 import AdminProjects from './admin/AdminProjects';
 import AdminSkills from './admin/AdminSkills';
 import AdminMessages from './admin/AdminMessages';
+import AdminPages from './admin/AdminPages';
 
 function App() {
   return (
@@ -42,8 +44,9 @@ function App() {
           }
         />
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="terms-of-use" element={<TermsOfUse />} /> 
-        <Route path="/cookies-policy" element={<CookiesPolicy />} />
+        <Route path="terms-of-use" element={<TermsOfUse />} />
+        <Route path="cookies-policy" element={<CookiesPolicy />} />
+        <Route path="p/:slug" element={<DynamicPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
 
@@ -58,6 +61,7 @@ function App() {
         <Route path="projects"  element={<AdminProjects />} />
         <Route path="skills"    element={<AdminSkills />} />
         <Route path="messages"  element={<AdminMessages />} />
+        <Route path="pages"     element={<AdminPages />} />
       </Route>
     </Routes>
   );

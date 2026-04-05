@@ -33,3 +33,12 @@ export interface Message {
   read: boolean;
   created_at: string;
 }
+
+export interface Page {
+  id: string;
+  slug: string;       // URL-safe identifier, e.g. "privacy-policy"
+  title: string;
+  content: string;    // HTML string
+  is_published: boolean;
+  updated_at: string;
+}

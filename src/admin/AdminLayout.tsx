@@ -17,6 +17,7 @@ const NAV_ITEMS = [
   { icon: '📁', label: 'Projects',  path: '/admin/projects'  },
   { icon: '⚡', label: 'Skills',    path: '/admin/skills'    },
   { icon: '✉️', label: 'Messages',  path: '/admin/messages'  },
+  { icon: '📄', label: 'Pages',     path: '/admin/pages'     },
 ];
 
 const PAGE_TITLES: Record<string, string> = {
@@ -24,6 +25,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/admin/projects':  'Projects',
   '/admin/skills':    'Skills',
   '/admin/messages':  'Messages',
+  '/admin/pages':     'Pages',
 };
 
 export default function AdminLayout() {

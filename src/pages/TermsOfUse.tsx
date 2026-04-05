@@ -1,3 +1,7 @@
+import { useState, useEffect } from 'react';
+import { getPageBySlug } from '../lib/db';
+import PageContent from '../components/PageContent';
+
 const Section = ({ title }: { title: string }) => (
   <h2 className="text-2xl font-semibold text-pink-400 mt-12 mb-4">{title}</h2>
 );
@@ -7,6 +11,26 @@ const Sub = ({ title }: { title: string }) => (
 );
 
 const TermsOfUse = () => {
+  const [dbPage, setDbPage] = useState<{ title: string; content: string; updated_at: string } | null>(null);
+
+  useEffect(() => {
+    getPageBySlug('terms-of-use').then(p => { if (p) setDbPage(p); }).catch(() => {});
+  }, []);
+
+  if (dbPage) {
+    return (
+      <section className="min-h-screen py-20 px-6 max-w-4xl mx-auto text-gray-600 dark:text-gray-300">
+        <div className="text-base md:text-lg leading-relaxed">
+          <h1 className="text-5xl font-bold text-purple-400 mt-10 mb-4">{dbPage.title}</h1>
+          <p className="text-gray-400 dark:text-gray-500 text-sm mb-10">
+            Last updated: {new Date(dbPage.updated_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
+          <PageContent html={dbPage.content} />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="min-h-screen py-20 px-6 max-w-4xl mx-auto text-gray-600 dark:text-gray-300">
       <div className="text-base md:text-lg leading-relaxed">
