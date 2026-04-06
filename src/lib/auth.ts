@@ -5,7 +5,10 @@ export const ADMIN_EMAIL = 'admin@portfolio.com';
 
 // Read from environment — set VITE_ADMIN_PASSWORD_HASH in .env.local and Vercel dashboard.
 // To generate a new hash: node -e "require('bcryptjs').hash('yourpass',10).then(console.log)"
-const ADMIN_PASSWORD_HASH = import.meta.env.VITE_ADMIN_PASSWORD_HASH as string | undefined;
+// Hash is stored as base64 in env to avoid dotenv-expand corrupting $ characters.
+// To update: node -e "require('bcryptjs').hash('pass',10).then(h=>console.log(Buffer.from(h).toString('base64')))"
+const _hashB64 = import.meta.env.VITE_ADMIN_PASSWORD_HASH as string | undefined;
+const ADMIN_PASSWORD_HASH = _hashB64 ? atob(_hashB64) : undefined;
 
 const SESSION_KEY = 'admin_session';
 
