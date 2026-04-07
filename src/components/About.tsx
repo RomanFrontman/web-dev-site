@@ -97,67 +97,6 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Technical Skills */}
-              <div className="bg-[var(--bg-subtle)] dark:bg-gradient-to-br dark:from-purple-500/10 dark:to-pink-500/10 rounded-2xl p-6 border border-[oklch(88%_0.014_349)] dark:border-white/10">
-                <h3 className="text-xl font-bold text-blue-400 mb-4">Technical Expertise</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      <span className="text-gray-600 dark:text-gray-300 text-sm">HTML5, CSS3, SASS/SCSS</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="w-2 h-2 bg-pink-400 rounded-full"></span>
-                      <span className="text-gray-600 dark:text-gray-300 text-sm">JavaScript, jQuery</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      <span className="text-gray-600 dark:text-gray-300 text-sm">React, Webpack</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      <span className="text-gray-600 dark:text-gray-300 text-sm">PHP, MySQL</span>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3">
-                      <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
-                      <span className="text-gray-600 dark:text-gray-300 text-sm">WordPress, Drupal</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="w-2 h-2 bg-red-400 rounded-full"></span>
-                      <span className="text-gray-600 dark:text-gray-300 text-sm">Bootstrap, Git</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="w-2 h-2 bg-indigo-400 rounded-full"></span>
-                      <span className="text-gray-600 dark:text-gray-300 text-sm">Figma Design</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="w-2 h-2 bg-cyan-400 rounded-full"></span>
-                      <span className="text-gray-600 dark:text-gray-300 text-sm">SEO Optimization</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* WordPress Plugins Expertise */}
-              <div className="bg-[var(--bg-surface)] backdrop-blur-sm rounded-2xl p-6 border border-[oklch(90%_0.012_349)] dark:border-white/10">
-                <h3 className="text-lg font-bold text-purple-400 mb-4">WordPress Plugins Mastery</h3>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    'Elementor PRO', 'Advanced Custom Fields', 'Contact Form 7', 
-                    'Custom Post Type', 'LiteSpeed Cache', 'Yoast SEO', 
-                    'WooCommerce', 'WPML', 'Gutenberg'
-                  ].map((plugin, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-purple-500/20 text rounded-full text-xs font-medium border border-purple-500/30 hover:bg-purple-500/30 transition-colors duration-300"
-                    >
-                      {plugin}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>
