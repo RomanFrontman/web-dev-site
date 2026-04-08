@@ -17,10 +17,11 @@ export interface Project {
 export interface Skill {
   id: string;
   name: string;
-  level: number;      // 0 = no progress bar (tools)
-  category: string;  // "Programming" | "Tool" | "Backend" | "Other"
+  level: number;        // 0 = no progress bar (tools)
+  category: string;     // "Programming" | "Tool" | "Backend" | "Other"
   icon: string;
-  color: string;      // Tailwind gradient classes e.g. "from-purple-500 to-blue-500"
+  color: string;        // Tailwind gradient classes e.g. "from-purple-500 to-blue-500"
+  description?: string; // short blurb for toolchain cards (optional)
   order: number;
   created_at: string;
 }

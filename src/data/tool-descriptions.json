@@ -1,0 +1,20 @@
+{
+  "WordPress":              "Build custom themes, plugins, and complex content architectures from scratch",
+  "Shopify":                "Create and customize e-commerce stores with Liquid templates and app integrations",
+  "Webflow":                "Design pixel-perfect responsive sites visually with custom code when needed",
+  "Advanced Custom Fields": "Extend WordPress content with custom fields, repeaters, and flexible layouts",
+  "WooCommerce":            "Build full-featured online stores with custom checkout flows and product logic",
+  "Yoast SEO":              "Optimize on-page SEO, XML sitemaps, and structured data for search visibility",
+  "Elementor Pro":          "Create landing pages and templates using a drag-and-drop visual editor",
+  "Contact Form 7":         "Set up and manage forms with custom validation and email routing",
+  "LiteSpeed Cache":        "Improve site performance with page caching, minification, and CDN support",
+  "WPML":                   "Translate and manage multilingual WordPress sites across any number of languages",
+  "Gutenberg":              "Build rich block-based page layouts and develop custom reusable blocks",
+  "Custom Post Types":      "Register custom content types and taxonomies for structured, scalable data",
+  "API Development":        "Design RESTful APIs, handle auth flows, and integrate third-party services",
+  "Stripe":                 "Implement payment flows, subscriptions, and webhook-driven order logic",
+  "Git":                    "Manage version control, branching strategies, and collaborative code workflows",
+  "Docker":                 "Containerize applications and standardize development environments",
+  "Vercel":                 "Deploy and ship frontend projects with CI/CD pipelines and edge functions",
+  "Figma":                  "Translate UI designs, extract tokens, and collaborate closely with designers"
+}

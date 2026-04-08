@@ -16,6 +16,7 @@ const NAV_ITEMS = [
   { icon: '🏠', label: 'Dashboard', path: '/admin/dashboard' },
   { icon: '📁', label: 'Projects',  path: '/admin/projects'  },
   { icon: '⚡', label: 'Skills',    path: '/admin/skills'    },
+  { icon: '🛠️', label: 'Toolchain', path: '/admin/toolchain' },
   { icon: '✉️', label: 'Messages',  path: '/admin/messages'  },
   { icon: '📄', label: 'Pages',     path: '/admin/pages'     },
 ];
@@ -24,6 +25,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/admin/dashboard': 'Dashboard',
   '/admin/projects':  'Projects',
   '/admin/skills':    'Skills',
+  '/admin/toolchain': 'Toolchain',
   '/admin/messages':  'Messages',
   '/admin/pages':     'Pages',
 };

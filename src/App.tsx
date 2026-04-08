@@ -21,6 +21,7 @@ import AdminLogin from './admin/AdminLogin';
 import AdminDashboard from './admin/AdminDashboard';
 import AdminProjects from './admin/AdminProjects';
 import AdminSkills from './admin/AdminSkills';
+import AdminToolchain from './admin/AdminToolchain';
 import AdminMessages from './admin/AdminMessages';
 import AdminPages from './admin/AdminPages';
 
@@ -59,8 +60,9 @@ function App() {
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="projects"  element={<AdminProjects />} />
-        <Route path="skills"    element={<AdminSkills />} />
-        <Route path="messages"  element={<AdminMessages />} />
+        <Route path="skills"     element={<AdminSkills />} />
+        <Route path="toolchain"  element={<AdminToolchain />} />
+        <Route path="messages"   element={<AdminMessages />} />
         <Route path="pages"     element={<AdminPages />} />
       </Route>
     </Routes>

@@ -1,39 +1,54 @@
 "use client";
-// src/admin/AdminSkills.tsx
+// src/admin/AdminToolchain.tsx
 import { useState, useEffect, type FormEvent } from 'react';
 import { GripVertical } from 'lucide-react';
 import { getSkills, addSkill, updateSkill, deleteSkill } from '../lib/db';
 import type { Skill } from '../types/database';
+import toolDescriptions from '../data/tool-descriptions.json';
 
-const SKILL_CATEGORIES = ['Core Skills', 'Frameworks & Libraries'];
+const TOOL_CATEGORIES = ['Platforms', 'WordPress Ecosystem', 'Backend & Integrations', 'Tools'];
 
-const EMPTY_FORM: Omit<Skill, 'id' | 'created_at'> = {
-  name: '', level: 80, category: 'Core Skills', icon: '🔧',
-  color: 'from-purple-500 to-blue-500', order: 0,
+type ToolForm = {
+  name: string;
+  icon: string;
+  category: string;
+  description: string;
+  order: number;
+  level: number;
+  color: string;
 };
 
-const INPUT = "w-full bg-[var(--bg-subtle)] dark:bg-black/20 border border-[oklch(90%_0.012_349)] dark:border-white/10 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500";
+const EMPTY_FORM: ToolForm = {
+  name: '', icon: '🔧', category: 'Platforms', description: '', order: 0,
+  level: 0, color: 'from-pink-400 to-purple-400',
+};
+
+const INPUT = "w-full bg-[var(--bg-subtle)] dark:bg-black/20 border border-[oklch(90%_0.012_349)] dark:border-white/10 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500";
+
+function descriptionHint(name: string): string | undefined {
+  return (toolDescriptions as Record<string, string>)[name];
+}
 
 function DropLine({ colSpan }: { colSpan: number }) {
   return (
     <tr className="pointer-events-none select-none">
       <td colSpan={colSpan} className="p-0">
         <div className="relative mx-3 my-0.5">
-          <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-purple-400 shadow-[0_0_8px_3px_rgba(192,132,252,0.6)]" />
-          <div className="h-0.5 bg-purple-400 rounded-full shadow-[0_0_6px_2px_rgba(192,132,252,0.4)]" />
+          <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-pink-400 shadow-[0_0_8px_3px_rgba(244,114,182,0.6)]" />
+          <div className="h-0.5 bg-pink-400 rounded-full shadow-[0_0_6px_2px_rgba(244,114,182,0.4)]" />
         </div>
       </td>
     </tr>
   );
 }
 
-export default function AdminSkills() {
-  const [skills, setSkills] = useState<Skill[]>([]);
+export default function AdminToolchain() {
+  const [tools, setTools] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
-  const [form, setForm] = useState<Omit<Skill, 'id' | 'created_at'>>(EMPTY_FORM);
+  const [form, setForm] = useState<ToolForm>(EMPTY_FORM);
   const [feedback, setFeedback] = useState<{ ok: boolean; msg: string } | null>(null);
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const [insertIdx, setInsertIdx] = useState<number | null>(null);
@@ -44,9 +59,13 @@ export default function AdminSkills() {
     setLoading(true);
     try {
       const all = await getSkills();
-      setSkills(all.filter(s => SKILL_CATEGORIES.includes(s.category) || s.category === 'Programming'));
+      setTools(
+        all
+          .filter(s => TOOL_CATEGORIES.includes(s.category) || s.category === 'Tool')
+          .sort((a, b) => a.order - b.order)
+      );
     } catch {
-      flash(false, 'Failed to load skills.');
+      flash(false, 'Failed to load toolchain.');
     } finally {
       setLoading(false);
     }
@@ -59,21 +78,29 @@ export default function AdminSkills() {
 
   function openAdd() { setEditId(null); setForm(EMPTY_FORM); setShowForm(true); }
 
-  function openEdit(s: Skill) {
-    setEditId(s.id);
-    setForm({ name: s.name, level: s.level, category: s.category, icon: s.icon, color: s.color, order: s.order });
+  function openEdit(t: Skill) {
+    setEditId(t.id);
+    setForm({
+      name: t.name,
+      icon: t.icon,
+      category: t.category,
+      description: t.description ?? descriptionHint(t.name) ?? '',
+      order: t.order,
+      level: t.level,
+      color: t.color,
+    });
     setShowForm(true);
   }
 
   async function handleDelete(id: string) {
-    if (!window.confirm('Delete this skill?')) return;
+    if (!window.confirm('Delete this tool?')) return;
     setSaving(true);
     try {
       await deleteSkill(id);
-      flash(true, 'Skill deleted.');
+      flash(true, 'Tool deleted.');
       await load();
     } catch {
-      flash(false, 'Failed to delete skill.');
+      flash(false, 'Failed to delete tool.');
     } finally {
       setSaving(false);
     }
@@ -85,19 +112,28 @@ export default function AdminSkills() {
     try {
       if (editId) {
         await updateSkill(editId, form);
-        flash(true, 'Skill updated.');
+        flash(true, 'Tool updated.');
       } else {
         await addSkill(form);
-        flash(true, 'Skill added.');
+        flash(true, 'Tool added.');
       }
       await load();
       setShowForm(false);
       setEditId(null);
     } catch {
-      flash(false, 'Failed to save skill.');
+      flash(false, 'Failed to save tool.');
     } finally {
       setSaving(false);
     }
+  }
+
+  function handleNameChange(name: string) {
+    const hint = descriptionHint(name);
+    setForm(prev => ({
+      ...prev,
+      name,
+      description: prev.description === '' && hint ? hint : prev.description,
+    }));
   }
 
   // ── Drag & drop ──────────────────────────────────────────────
@@ -116,14 +152,13 @@ export default function AdminSkills() {
   function handleDrop(e: React.DragEvent) {
     e.preventDefault();
     if (dragIdx === null || insertIdx === null) { resetDrag(); return; }
-    // Adjust target index since we're removing dragIdx first
     const target = insertIdx > dragIdx ? insertIdx - 1 : insertIdx;
     if (target === dragIdx) { resetDrag(); return; }
-    const reordered = [...skills];
+    const reordered = [...tools];
     const [moved] = reordered.splice(dragIdx, 1);
     reordered.splice(target, 0, moved);
-    const withOrder = reordered.map((s, i) => ({ ...s, order: i + 1 }));
-    setSkills(withOrder);
+    const withOrder = reordered.map((t, i) => ({ ...t, order: i + 1 }));
+    setTools(withOrder);
     resetDrag();
     void saveOrder(withOrder);
   }
@@ -133,7 +168,7 @@ export default function AdminSkills() {
   async function saveOrder(ordered: Skill[]) {
     setSaving(true);
     try {
-      await Promise.all(ordered.map((s, i) => updateSkill(s.id, { order: i + 1 })));
+      await Promise.all(ordered.map((t, i) => updateSkill(t.id, { order: i + 1 })));
       flash(true, 'Order saved.');
     } catch {
       flash(false, 'Failed to save order.');
@@ -145,13 +180,13 @@ export default function AdminSkills() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Skills</h2>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Toolchain</h2>
         <button
           onClick={openAdd}
           disabled={saving}
-          className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90 rounded-lg text-white text-sm font-medium transition disabled:opacity-50"
+          className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-90 rounded-lg text-white text-sm font-medium transition disabled:opacity-50"
         >
-          + Add Skill
+          + Add Tool
         </button>
       </div>
 
@@ -173,19 +208,19 @@ export default function AdminSkills() {
                   <th className="text-left px-4 py-3 font-medium">Icon</th>
                   <th className="text-left px-4 py-3 font-medium">Name</th>
                   <th className="text-left px-4 py-3 font-medium">Category</th>
-                  <th className="text-left px-4 py-3 font-medium">Level</th>
+                  <th className="text-left px-4 py-3 font-medium">Description</th>
                   <th className="text-left px-4 py-3 font-medium">Order</th>
                   <th className="text-right px-4 py-3 font-medium">Actions</th>
                 </tr>
               </thead>
               <tbody onDragOver={e => e.preventDefault()}>
-                {skills.map((s, i) => (
+                {tools.map((t, i) => (
                   <>
                     {insertIdx === i && dragIdx !== null && dragIdx !== i && dragIdx !== i - 1 && (
                       <DropLine key={`drop-${i}`} colSpan={7} />
                     )}
                     <tr
-                      key={s.id}
+                      key={t.id}
                       draggable
                       onDragStart={() => handleDragStart(i)}
                       onDragOver={e => handleDragOver(e, i)}
@@ -198,30 +233,27 @@ export default function AdminSkills() {
                       <td className="px-2 py-3 cursor-grab active:cursor-grabbing text-gray-400">
                         <GripVertical size={16} />
                       </td>
-                      <td className="px-4 py-3 text-xl">{s.icon}</td>
-                      <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{s.name}</td>
-                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{s.category}</td>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-2">
-                          <div className="w-20 h-1.5 bg-[oklch(90%_0.012_349)] dark:bg-gray-700 rounded-full overflow-hidden">
-                            <div className={`h-full bg-gradient-to-r ${s.color} rounded-full`} style={{ width: `${s.level}%` }} />
-                          </div>
-                          <span className="text-xs text-gray-400">{s.level}%</span>
-                        </div>
+                      <td className="px-4 py-3 text-xl">{t.icon}</td>
+                      <td className="px-4 py-3 font-medium text-gray-900 dark:text-white whitespace-nowrap">{t.name}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 whitespace-nowrap">{t.category}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400 max-w-xs">
+                        <span className="line-clamp-1">
+                          {t.description ?? descriptionHint(t.name) ?? <span className="italic opacity-50">—</span>}
+                        </span>
                       </td>
-                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{s.order}</td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{t.order}</td>
                       <td className="px-4 py-3 text-right space-x-2 whitespace-nowrap">
-                        <button onClick={() => openEdit(s)} disabled={saving} className="px-3 py-1.5 text-xs rounded-lg border border-[oklch(90%_0.012_349)] dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-purple-400 hover:text-purple-400 transition disabled:opacity-50">
+                        <button onClick={() => openEdit(t)} disabled={saving} className="px-3 py-1.5 text-xs rounded-lg border border-[oklch(90%_0.012_349)] dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-pink-400 hover:text-pink-400 transition disabled:opacity-50">
                           Edit
                         </button>
-                        <button onClick={() => handleDelete(s.id)} disabled={saving} className="px-3 py-1.5 text-xs rounded-lg text-red-400 hover:bg-red-500/10 transition disabled:opacity-50">
+                        <button onClick={() => handleDelete(t.id)} disabled={saving} className="px-3 py-1.5 text-xs rounded-lg text-red-400 hover:bg-red-500/10 transition disabled:opacity-50">
                           Delete
                         </button>
                       </td>
                     </tr>
                   </>
                 ))}
-                {insertIdx === skills.length && dragIdx !== null && dragIdx !== skills.length - 1 && (
+                {insertIdx === tools.length && dragIdx !== null && dragIdx !== tools.length - 1 && (
                   <DropLine colSpan={7} />
                 )}
               </tbody>
@@ -236,7 +268,7 @@ export default function AdminSkills() {
           className="bg-[var(--bg-surface)] rounded-2xl border border-[oklch(90%_0.012_349)] dark:border-white/10 p-6 space-y-4"
         >
           <h3 className="text-base font-semibold text-gray-900 dark:text-white">
-            {editId ? 'Edit Skill' : 'Add Skill'}
+            {editId ? 'Edit Tool' : 'Add Tool'}
           </h3>
 
           <div className="grid sm:grid-cols-2 gap-4">
@@ -244,11 +276,16 @@ export default function AdminSkills() {
               <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">
                 Name <span className="text-red-400">*</span>
               </label>
-              <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required className={INPUT} />
+              <input
+                value={form.name}
+                onChange={e => handleNameChange(e.target.value)}
+                required
+                className={INPUT}
+              />
             </div>
             <div>
               <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">Icon (emoji)</label>
-              <input value={form.icon} onChange={e => setForm({ ...form, icon: e.target.value })} className={INPUT} placeholder="⚛️" />
+              <input value={form.icon} onChange={e => setForm({ ...form, icon: e.target.value })} className={INPUT} placeholder="🔧" />
             </div>
           </div>
 
@@ -256,7 +293,7 @@ export default function AdminSkills() {
             <div>
               <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">Category</label>
               <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} className={INPUT}>
-                {SKILL_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                {TOOL_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div>
@@ -266,26 +303,19 @@ export default function AdminSkills() {
           </div>
 
           <div>
-            <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">
-              Level: <span className="text-purple-400 font-medium">{form.level}%</span>
-            </label>
-            <input
-              type="range" min={0} max={100} value={form.level}
-              onChange={e => setForm({ ...form, level: Number(e.target.value) })}
-              className="w-full accent-purple-500"
+            <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">Description</label>
+            <textarea
+              value={form.description}
+              onChange={e => setForm({ ...form, description: e.target.value })}
+              rows={2}
+              placeholder="Short description of what you can do with this tool…"
+              className={INPUT + ' resize-none'}
             />
           </div>
 
-          <div>
-            <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">
-              Gradient color (Tailwind classes)
-            </label>
-            <input value={form.color} onChange={e => setForm({ ...form, color: e.target.value })} className={INPUT} placeholder="from-purple-500 to-blue-500" />
-          </div>
-
           <div className="flex gap-3 pt-2">
-            <button type="submit" disabled={saving} className="px-5 py-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:opacity-90 rounded-lg text-white text-sm font-medium transition disabled:opacity-50">
-              {saving ? 'Saving…' : editId ? 'Save Changes' : 'Add Skill'}
+            <button type="submit" disabled={saving} className="px-5 py-2 bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-90 rounded-lg text-white text-sm font-medium transition disabled:opacity-50">
+              {saving ? 'Saving…' : editId ? 'Save Changes' : 'Add Tool'}
             </button>
             <button
               type="button"

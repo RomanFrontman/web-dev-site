@@ -1,6 +1,7 @@
 "use client";
 // src/admin/AdminProjects.tsx
 import { useState, useEffect, type FormEvent } from 'react';
+import { GripVertical } from 'lucide-react';
 import { getProjects, addProject, updateProject, deleteProject } from '../lib/db';
 import type { Project } from '../types/database';
 
@@ -22,6 +23,19 @@ function Field({ label, required, children }: { label: string; required?: boolea
   );
 }
 
+function DropLine({ colSpan }: { colSpan: number }) {
+  return (
+    <tr className="pointer-events-none select-none">
+      <td colSpan={colSpan} className="p-0">
+        <div className="relative mx-3 my-0.5">
+          <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-purple-400 shadow-[0_0_8px_3px_rgba(192,132,252,0.6)]" />
+          <div className="h-0.5 bg-purple-400 rounded-full shadow-[0_0_6px_2px_rgba(192,132,252,0.4)]" />
+        </div>
+      </td>
+    </tr>
+  );
+}
+
 export default function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +45,8 @@ export default function AdminProjects() {
   const [form, setForm] = useState<Omit<Project, 'id' | 'created_at'>>(EMPTY_FORM);
   const [techInput, setTechInput] = useState('');
   const [feedback, setFeedback] = useState<{ ok: boolean; msg: string } | null>(null);
+  const [dragIdx, setDragIdx] = useState<number | null>(null);
+  const [insertIdx, setInsertIdx] = useState<number | null>(null);
 
   useEffect(() => { void load(); }, []);
 
@@ -103,6 +119,47 @@ export default function AdminProjects() {
     }
   }
 
+  // ── Drag & drop ──────────────────────────────────────────────
+
+  function handleDragStart(index: number) {
+    setDragIdx(index);
+  }
+
+  function handleDragOver(e: React.DragEvent<HTMLTableRowElement>, index: number) {
+    e.preventDefault();
+    const rect = e.currentTarget.getBoundingClientRect();
+    const insert = e.clientY < rect.top + rect.height / 2 ? index : index + 1;
+    if (insert !== insertIdx) setInsertIdx(insert);
+  }
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault();
+    if (dragIdx === null || insertIdx === null) { resetDrag(); return; }
+    const target = insertIdx > dragIdx ? insertIdx - 1 : insertIdx;
+    if (target === dragIdx) { resetDrag(); return; }
+    const reordered = [...projects];
+    const [moved] = reordered.splice(dragIdx, 1);
+    reordered.splice(target, 0, moved);
+    const withOrder = reordered.map((p, i) => ({ ...p, order: i + 1 }));
+    setProjects(withOrder);
+    resetDrag();
+    void saveOrder(withOrder);
+  }
+
+  function resetDrag() { setDragIdx(null); setInsertIdx(null); }
+
+  async function saveOrder(ordered: Project[]) {
+    setSaving(true);
+    try {
+      await Promise.all(ordered.map((p, i) => updateProject(p.id, { order: i + 1 })));
+      flash(true, 'Order saved.');
+    } catch {
+      flash(false, 'Failed to save order.');
+    } finally {
+      setSaving(false);
+    }
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -133,6 +190,7 @@ export default function AdminProjects() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[oklch(90%_0.012_349)] dark:border-white/10 text-xs text-gray-500 dark:text-gray-400">
+                  <th className="w-8 px-2 py-3" />
                   <th className="text-left px-4 py-3 font-medium">Order</th>
                   <th className="text-left px-4 py-3 font-medium">Title</th>
                   <th className="text-left px-4 py-3 font-medium">Tech</th>
@@ -140,35 +198,56 @@ export default function AdminProjects() {
                   <th className="text-right px-4 py-3 font-medium">Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                {projects.map(p => (
-                  <tr key={p.id} className="border-b border-[oklch(90%_0.012_349)] dark:border-white/10 last:border-0 hover:bg-[var(--bg-subtle)] transition-colors">
-                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{p.order}</td>
-                    <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{p.title}</td>
-                    <td className="px-4 py-3">
-                      <div className="flex flex-wrap gap-1">
-                        {p.tech.slice(0, 3).map(t => (
-                          <span key={t} className="px-1.5 py-0.5 bg-purple-500/20 text-purple-300 rounded text-xs">{t}</span>
-                        ))}
-                        {p.tech.length > 3 && <span className="text-gray-400 text-xs">+{p.tech.length - 3}</span>}
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      {p.featured
-                        ? <span className="px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 text-xs">Yes</span>
-                        : <span className="px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs">No</span>
-                      }
-                    </td>
-                    <td className="px-4 py-3 text-right space-x-2 whitespace-nowrap">
-                      <button onClick={() => openEdit(p)} disabled={saving} className="px-3 py-1.5 text-xs rounded-lg border border-[oklch(90%_0.012_349)] dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-purple-400 hover:text-purple-400 transition disabled:opacity-50">
-                        Edit
-                      </button>
-                      <button onClick={() => handleDelete(p.id)} disabled={saving} className="px-3 py-1.5 text-xs rounded-lg text-red-400 hover:bg-red-500/10 transition disabled:opacity-50">
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
+              <tbody onDragOver={e => e.preventDefault()}>
+                {projects.map((p, i) => (
+                  <>
+                    {insertIdx === i && dragIdx !== null && dragIdx !== i && dragIdx !== i - 1 && (
+                      <DropLine key={`drop-${i}`} colSpan={6} />
+                    )}
+                    <tr
+                      key={p.id}
+                      draggable
+                      onDragStart={() => handleDragStart(i)}
+                      onDragOver={e => handleDragOver(e, i)}
+                      onDrop={handleDrop}
+                      onDragEnd={resetDrag}
+                      className={`border-b border-[oklch(90%_0.012_349)] dark:border-white/10 last:border-0 transition-colors
+                        ${dragIdx === i ? 'opacity-40 bg-[var(--bg-subtle)]' : 'hover:bg-[var(--bg-subtle)]'}
+                      `}
+                    >
+                      <td className="px-2 py-3 cursor-grab active:cursor-grabbing text-gray-400">
+                        <GripVertical size={16} />
+                      </td>
+                      <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{p.order}</td>
+                      <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{p.title}</td>
+                      <td className="px-4 py-3">
+                        <div className="flex flex-wrap gap-1">
+                          {p.tech.slice(0, 3).map(t => (
+                            <span key={t} className="px-1.5 py-0.5 bg-purple-500/20 text-purple-300 rounded text-xs">{t}</span>
+                          ))}
+                          {p.tech.length > 3 && <span className="text-gray-400 text-xs">+{p.tech.length - 3}</span>}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        {p.featured
+                          ? <span className="px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 text-xs">Yes</span>
+                          : <span className="px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs">No</span>
+                        }
+                      </td>
+                      <td className="px-4 py-3 text-right space-x-2 whitespace-nowrap">
+                        <button onClick={() => openEdit(p)} disabled={saving} className="px-3 py-1.5 text-xs rounded-lg border border-[oklch(90%_0.012_349)] dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-purple-400 hover:text-purple-400 transition disabled:opacity-50">
+                          Edit
+                        </button>
+                        <button onClick={() => handleDelete(p.id)} disabled={saving} className="px-3 py-1.5 text-xs rounded-lg text-red-400 hover:bg-red-500/10 transition disabled:opacity-50">
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </>
                 ))}
+                {insertIdx === projects.length && dragIdx !== null && dragIdx !== projects.length - 1 && (
+                  <DropLine colSpan={6} />
+                )}
               </tbody>
             </table>
           </div>
