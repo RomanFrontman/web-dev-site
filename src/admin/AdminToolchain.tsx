@@ -5,6 +5,8 @@ import { GripVertical } from 'lucide-react';
 import { getSkills, addSkill, updateSkill, deleteSkill } from '../lib/db';
 import type { Skill } from '../types/database';
 import toolDescriptions from '../data/tool-descriptions.json';
+import TechIconPicker from './TechIconPicker';
+import { TechIcon, TECH_ICONS } from '../lib/tech-icons';
 
 const TOOL_CATEGORIES = ['Platforms', 'WordPress Ecosystem', 'Backend & Integrations', 'Tools'];
 
@@ -19,7 +21,7 @@ type ToolForm = {
 };
 
 const EMPTY_FORM: ToolForm = {
-  name: '', icon: '🔧', category: 'Platforms', description: '', order: 0,
+  name: '', icon: '', category: 'Platforms', description: '', order: 0,
   level: 0, color: 'from-pink-400 to-purple-400',
 };
 
@@ -233,7 +235,11 @@ export default function AdminToolchain() {
                       <td className="px-2 py-3 cursor-grab active:cursor-grabbing text-gray-400">
                         <GripVertical size={16} />
                       </td>
-                      <td className="px-4 py-3 text-xl">{t.icon}</td>
+                      <td className="px-4 py-3">
+                        {TECH_ICONS[t.icon] || TECH_ICONS[t.name]
+                          ? <TechIcon name={TECH_ICONS[t.icon] ? t.icon : t.name} size={22} />
+                          : <span className="text-lg">{t.icon || '—'}</span>}
+                      </td>
                       <td className="px-4 py-3 font-medium text-gray-900 dark:text-white whitespace-nowrap">{t.name}</td>
                       <td className="px-4 py-3 text-gray-500 dark:text-gray-400 whitespace-nowrap">{t.category}</td>
                       <td className="px-4 py-3 text-gray-500 dark:text-gray-400 max-w-xs">
@@ -284,8 +290,8 @@ export default function AdminToolchain() {
               />
             </div>
             <div>
-              <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">Icon (emoji)</label>
-              <input value={form.icon} onChange={e => setForm({ ...form, icon: e.target.value })} className={INPUT} placeholder="🔧" />
+              <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">Icon</label>
+              <TechIconPicker value={form.icon} onChange={icon => setForm({ ...form, icon })} />
             </div>
           </div>
 

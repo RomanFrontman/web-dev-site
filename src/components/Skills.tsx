@@ -4,6 +4,8 @@ import AnimatedSection from './AnimatedSection';
 import { getSkills } from '../lib/db';
 import type { Skill } from '../types/database';
 import toolDescriptions from '../data/tool-descriptions.json';
+import { TechIcon, TECH_ICONS } from '../lib/tech-icons';
+import { Code2, Wrench } from 'lucide-react';
 
 // Categories that carry a proficiency level (shown in left column).
 // 'Programming' is the legacy DB value — kept for backward compatibility.
@@ -84,17 +86,19 @@ function SkillCard({ skill, index, selected, onSelect }: SkillCardProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
         onClick={onSelect}
-        className={`relative bg-[var(--bg-surface)] backdrop-blur-md rounded-xl p-5 border cursor-pointer
-          transition-all duration-300 hover:scale-105 overflow-visible
-          ${selected
+        className={`bg-[var(--bg-surface)] backdrop-blur-md rounded-xl p-5 border cursor-pointer
+          transition-all duration-300 hover:scale-105          ${selected
             ? 'border-purple-400/70 ring-2 ring-purple-400/25'
             : 'border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 hover:ring-2 hover:ring-purple-400/20'
           }`}
       >
-        <div className="absolute -top-1.5 -left-1.5 w-3 h-3 rotate-45 bg-gradient-to-br from-purple-400 to-pink-400" />
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-2xl">{skill.icon}</span>
+            <span className="flex items-center justify-center w-8 h-8 shrink-0">
+              {(TECH_ICONS[skill.icon ?? ''] || TECH_ICONS[skill.name])
+                ? <TechIcon name={TECH_ICONS[skill.icon ?? ''] ? skill.icon! : skill.name} size={26} />
+                : <span className="text-2xl">{skill.icon}</span>}
+            </span>
             <div>
               <div className="text-base font-bold text-gray-900 dark:text-white leading-tight">{skill.name}</div>
               <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{skill.category}</div>
@@ -154,15 +158,17 @@ function ToolCard({ tool, index, selected, onSelect, description }: ToolCardProp
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.06 }}
         onClick={onSelect}
-        className={`relative bg-[var(--bg-surface)] backdrop-blur-md rounded-xl p-4 border cursor-pointer
-          transition-all duration-300 hover:scale-105 text-center overflow-visible
-          ${selected
+        className={`bg-[var(--bg-surface)] backdrop-blur-md rounded-xl p-4 border cursor-pointer
+          transition-all duration-300 hover:scale-105 text-center          ${selected
             ? 'border-pink-400/70 ring-2 ring-pink-400/25'
             : 'border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-pink-400/50 hover:ring-2 hover:ring-pink-400/20'
           }`}
       >
-        <div className="absolute -top-1.5 -left-1.5 w-3 h-3 rotate-45 bg-gradient-to-br from-pink-400 to-purple-400" />
-        <div className="text-2xl mb-1.5">{tool.icon}</div>
+        <div className="flex items-center justify-center h-9 mb-2">
+          {(TECH_ICONS[tool.icon ?? ''] || TECH_ICONS[tool.name])
+            ? <TechIcon name={TECH_ICONS[tool.icon ?? ''] ? tool.icon! : tool.name} size={30} />
+            : <span className="text-2xl">{tool.icon}</span>}
+        </div>
         <div className="text-xs font-bold text-gray-900 dark:text-white leading-tight">{tool.name}</div>
       </motion.div>
 
@@ -279,7 +285,7 @@ export default function Skills() {
                 {/* ── Left column: proficiency skills ── */}
                 <div className="space-y-2">
                   <div className="mb-4">
-                    <h3 className="text-2xl font-bold text-purple-400 flex items-center gap-2">⚔️ Skills</h3>
+                    <h3 className="text-2xl font-bold text-purple-400 flex items-center gap-2"><Code2 size={22} /> Skills</h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                       Languages & frameworks I've built proficiency in — click to inspect my level.
                     </p>
@@ -311,7 +317,7 @@ export default function Skills() {
                 {/* ── Right column: platforms & tools ── */}
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-pink-400 flex items-center gap-2">🛡️ Toolchain</h3>
+                    <h3 className="text-2xl font-bold text-pink-400 flex items-center gap-2"><Wrench size={22} /> Toolchain</h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                       Platforms & tools I reach for on every project.
                     </p>
@@ -323,7 +329,7 @@ export default function Skills() {
                     return (
                       <div key={cat} className="space-y-3">
                         <CategoryLabel label={cat} />
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-3 gap-3">
                           {group.map((tool, i) => (
                             <ToolCard
                               key={tool.id}
@@ -339,28 +345,6 @@ export default function Skills() {
                     );
                   })}
 
-                  {/* Abilities */}
-                  <div className="bg-[var(--bg-subtle)] dark:bg-gradient-to-br dark:from-purple-500/10 dark:to-pink-500/10 rounded-2xl p-8 border border-[oklch(88%_0.014_349)] dark:border-white/10 mt-4">
-                    <h4 className="text-2xl font-bold text-purple-400 mb-6">Abilities</h4>
-                    <div className="space-y-4">
-                      <div className="flex items-center space-x-3">
-                        <span>⚔️</span>
-                        <span className="text-gray-600 dark:text-gray-300">Custom WordPress Development</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <span>⭐</span>
-                        <span className="text-gray-600 dark:text-gray-300">Responsive, cross-browser websites on React.js</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <span>⚔️</span>
-                        <span className="text-gray-600 dark:text-gray-300">E-commerce Solutions</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <span>⭐</span>
-                        <span className="text-gray-600 dark:text-gray-300">API Development & Integration</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
               </div>

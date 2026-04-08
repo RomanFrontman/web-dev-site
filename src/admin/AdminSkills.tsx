@@ -4,11 +4,13 @@ import { useState, useEffect, type FormEvent } from 'react';
 import { GripVertical } from 'lucide-react';
 import { getSkills, addSkill, updateSkill, deleteSkill } from '../lib/db';
 import type { Skill } from '../types/database';
+import TechIconPicker from './TechIconPicker';
+import { TechIcon, TECH_ICONS } from '../lib/tech-icons';
 
 const SKILL_CATEGORIES = ['Core Skills', 'Frameworks & Libraries'];
 
 const EMPTY_FORM: Omit<Skill, 'id' | 'created_at'> = {
-  name: '', level: 80, category: 'Core Skills', icon: '🔧',
+  name: '', level: 80, category: 'Core Skills', icon: '',
   color: 'from-purple-500 to-blue-500', order: 0,
 };
 
@@ -198,7 +200,11 @@ export default function AdminSkills() {
                       <td className="px-2 py-3 cursor-grab active:cursor-grabbing text-gray-400">
                         <GripVertical size={16} />
                       </td>
-                      <td className="px-4 py-3 text-xl">{s.icon}</td>
+                      <td className="px-4 py-3">
+                        {TECH_ICONS[s.icon] || TECH_ICONS[s.name]
+                          ? <TechIcon name={TECH_ICONS[s.icon] ? s.icon : s.name} size={22} />
+                          : <span className="text-lg">{s.icon || '—'}</span>}
+                      </td>
                       <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{s.name}</td>
                       <td className="px-4 py-3 text-gray-500 dark:text-gray-400">{s.category}</td>
                       <td className="px-4 py-3">
@@ -239,17 +245,16 @@ export default function AdminSkills() {
             {editId ? 'Edit Skill' : 'Add Skill'}
           </h3>
 
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">
-                Name <span className="text-red-400">*</span>
-              </label>
-              <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required className={INPUT} />
-            </div>
-            <div>
-              <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">Icon (emoji)</label>
-              <input value={form.icon} onChange={e => setForm({ ...form, icon: e.target.value })} className={INPUT} placeholder="⚛️" />
-            </div>
+          <div>
+            <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">
+              Name <span className="text-red-400">*</span>
+            </label>
+            <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required className={INPUT} />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1.5">Icon</label>
+            <TechIconPicker value={form.icon} onChange={icon => setForm({ ...form, icon })} />
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
