@@ -5,51 +5,51 @@ import AnimatedSection from './AnimatedSection';
 
 const TESTIMONIALS = [
   {
-    name: 'Oleksiy Petrenko',
-    title: 'CTO, SoftVision UA',
-    country: '🇺🇦 Ukraine',
+    name: 'James Hartley',
+    title: 'Director, Connective Technologies',
+    country: '🇬🇧 United Kingdom',
     quote:
-      'Roman built a fully custom WordPress theme for our SaaS platform from scratch — no page builders, no templates. Hand-coded PHP, Tailwind, and custom post types. PageSpeed went from 54 to 97 after launch. Exactly the level of quality we needed.',
+      'Roman delivered a polished corporate website on WordPress with Elementor and ACF. The SEO setup was thorough, pages load instantly, and the layout reflects exactly the professional image we needed. Communication was clear throughout and he met every deadline.',
     image: 'https://randomuser.me/api/portraits/men/26.jpg',
   },
   {
-    name: 'Natalia Kovalchuk',
-    title: 'Owner, NatKoval Shop',
-    country: '🇺🇦 Ukraine',
+    name: 'Sofia Marchetti',
+    title: 'UX Designer, Freelance',
+    country: '🇮🇹 Italy',
     quote:
-      'We had a complex WooCommerce setup — custom checkout flow, ACF product fields, and a membership integration. Roman understood the requirements immediately and delivered in two weeks without any back-and-forth. Would hire again without hesitation.',
+      'I needed a portfolio that felt modern and made a strong first impression. Roman built it with React, Tailwind, and Framer Motion — dark mode, smooth animations, fully responsive. It\'s exactly what I envisioned and I\'ve already landed new clients through it.',
     image: 'https://randomuser.me/api/portraits/women/22.jpg',
   },
   {
-    name: 'Tomasz Wojciechowski',
-    title: 'Founder, TechCraft Agency',
-    country: '🇵🇱 Poland',
+    name: 'Olena Savchenko',
+    title: 'Owner, CleanClin',
+    country: '🇺🇦 Ukraine',
     quote:
-      'I run a digital agency in Warsaw and subcontract demanding frontend work to Roman. His React and Tailwind output is clean, deadlines are always met, and communication is smooth. One of the most dependable freelancers in my network.',
-    image: 'https://randomuser.me/api/portraits/men/31.jpg',
-  },
-  {
-    name: 'Agnieszka Dąbrowska',
-    title: 'Marketing Manager, FinGroup PL',
-    country: '🇵🇱 Poland',
-    quote:
-      'Roman rebuilt our corporate site on WordPress under a tight deadline. He handled everything — custom Elementor Pro sections, Yoast SEO configuration, speed optimisation with LiteSpeed Cache. Results were outstanding and the team was impressed.',
+      'Roman built our cleaning company website from scratch on WordPress — multiple service pages, Elementor layouts, ACF fields, and proper SEO. Within two months of launch we were getting calls directly from Google search. Absolutely worth every hryvnia.',
     image: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   {
     name: 'David Harrington',
-    title: 'Founder, LaunchPad Inc.',
+    title: 'Founder, LaunchPad Finance',
     country: '🇺🇸 United States',
     quote:
-      'Hired Roman for a React + Tailwind marketing site with Stripe payment integration. He understood the spec quickly, asked the right questions upfront, and shipped clean, well-structured code on schedule. Will definitely work together again.',
+      'We needed a high-converting landing page for our online finance courses — fast, mobile-friendly, and visually sharp. Roman built it with Bootstrap, JavaScript, and SCSS. Clean code, no bloat, launched on schedule, and our sign-up rate improved noticeably.',
     image: 'https://randomuser.me/api/portraits/men/52.jpg',
   },
   {
-    name: 'Emma Clarke',
-    title: 'Product Lead, Brightwave UK',
-    country: '🇬🇧 United Kingdom',
+    name: 'Vasyl Bondarenko',
+    title: 'CEO, CR Real Estate',
+    country: '🇺🇦 Ukraine',
     quote:
-      'Roman rebuilt our company website and wired up a Stripe-based subscription flow. The project had a lot of moving parts but he managed it professionally — clear updates at every stage, zero major issues, delivered on time.',
+      'Roman built our property sales platform on WordPress with ACF, SCSS, and custom filtering by district, price, and type. The site handles a large catalogue without slowing down. Our agents love the admin interface and clients find it very intuitive.',
+    image: 'https://randomuser.me/api/portraits/men/31.jpg',
+  },
+  {
+    name: 'Dr. Iryna Melnyk',
+    title: 'Owner, Merlion Veterinary Clinic',
+    country: '🇺🇦 Ukraine',
+    quote:
+      'Roman created a full WordPress website for our clinic with Elementor, ACF, and a personal account system for pet owners. Clients can log in, view records, and book appointments. The design is warm and professional — our clients feel right at home.',
     image: 'https://randomuser.me/api/portraits/women/68.jpg',
   },
 ];
