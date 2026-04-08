@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 
 const TESTIMONIALS = [
@@ -55,16 +56,29 @@ const TESTIMONIALS = [
 
 type Testimonial = typeof TESTIMONIALS[number];
 
+function Stars() {
+  return (
+    <div className="flex items-center gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star key={i} size={13} className="fill-purple-400 text-purple-400" />
+      ))}
+    </div>
+  );
+}
+
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
-    <div className="relative bg-[var(--bg-surface)] backdrop-blur-md rounded-xl p-6 border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 hover:ring-2 hover:ring-purple-400/15 transition-all duration-300 overflow-visible h-full flex flex-col">
-      {/* Diamond accent */}
-      <div className="absolute -top-1.5 -left-1.5 w-3 h-3 rotate-45 bg-gradient-to-br from-purple-400 to-pink-400" />
+    <div className="bg-[var(--bg-surface)] backdrop-blur-md rounded-2xl p-6 border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 hover:ring-2 hover:ring-purple-400/15 transition-all duration-300 h-full flex flex-col">
 
-      {/* Header row */}
-      <div className="flex justify-between items-start mb-4">
-        <span className="text-purple-400/60 text-3xl leading-none font-serif">❝</span>
-        <span className="text-xs text-gray-500 dark:text-gray-400 tabular-nums">{item.country}</span>
+      {/* Header: quote icon + country + stars */}
+      <div className="flex items-start justify-between mb-4">
+        <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500/15 to-pink-500/15 border border-purple-400/20">
+          <Quote size={16} className="text-purple-400" />
+        </div>
+        <div className="flex flex-col items-end gap-1.5">
+          <span className="text-xs text-gray-500 dark:text-gray-400">{item.country}</span>
+          <Stars />
+        </div>
       </div>
 
       {/* Quote */}
@@ -74,11 +88,13 @@ function TestimonialCard({ item }: { item: Testimonial }) {
 
       {/* Author */}
       <div className="flex items-center gap-3 pt-4 border-t border-[oklch(90%_0.012_349)] dark:border-white/10">
-        <img
-          src={item.image}
-          alt={item.name}
-          className="w-11 h-11 rounded-full object-cover border-2 border-purple-500/40"
-        />
+        <div className="p-0.5 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 shrink-0">
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-10 h-10 rounded-full object-cover"
+          />
+        </div>
         <div>
           <div className="text-sm font-bold text-gray-900 dark:text-white">{item.name}</div>
           <div className="text-xs text-purple-400">{item.title}</div>
@@ -88,42 +104,37 @@ function TestimonialCard({ item }: { item: Testimonial }) {
   );
 }
 
+function NavButton({ onClick, label, children }: { onClick: () => void; label: string; children: React.ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label={label}
+      className="w-10 h-10 rounded-full bg-[var(--bg-surface)] border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 hover:bg-purple-500/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-purple-400 transition-all duration-200"
+    >
+      {children}
+    </button>
+  );
+}
+
 export default function Testimonials() {
   const total = TESTIMONIALS.length;
   const PER_PAGE = 3;
-  const totalPages = Math.ceil(total / PER_PAGE); // 2 pages of 3
+  const totalPages = Math.ceil(total / PER_PAGE);
 
-  // Desktop: page-based navigation (jumps all 3 at once)
   const [page, setPage] = useState(0);
   const [pageDir, setPageDir] = useState(1);
 
-  function prevPage() {
-    setPageDir(-1);
-    setPage(p => (p - 1 + totalPages) % totalPages);
-  }
-  function nextPage() {
-    setPageDir(1);
-    setPage(p => (p + 1) % totalPages);
-  }
-  function goToPage(p: number) {
-    setPageDir(p > page ? 1 : -1);
-    setPage(p);
-  }
+  function prevPage() { setPageDir(-1); setPage(p => (p - 1 + totalPages) % totalPages); }
+  function nextPage() { setPageDir(1);  setPage(p => (p + 1) % totalPages); }
+  function goToPage(p: number) { setPageDir(p > page ? 1 : -1); setPage(p); }
 
   const desktopIndices = [0, 1, 2].map(offset => page * PER_PAGE + offset);
 
-  // Mobile: individual card navigation
   const [mobileIdx, setMobileIdx] = useState(0);
   const [mobileDir, setMobileDir] = useState(1);
 
-  function prevMobile() {
-    setMobileDir(-1);
-    setMobileIdx(i => (i - 1 + total) % total);
-  }
-  function nextMobile() {
-    setMobileDir(1);
-    setMobileIdx(i => (i + 1) % total);
-  }
+  function prevMobile() { setMobileDir(-1); setMobileIdx(i => (i - 1 + total) % total); }
+  function nextMobile() { setMobileDir(1);  setMobileIdx(i => (i + 1) % total); }
 
   return (
     <AnimatedSection>
@@ -141,7 +152,7 @@ export default function Testimonials() {
               <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto rounded-full mt-6" />
             </div>
 
-            {/* Mobile: single card, navigates one at a time */}
+            {/* Mobile */}
             <div className="lg:hidden mb-8 min-h-[340px]">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
@@ -156,19 +167,22 @@ export default function Testimonials() {
               </AnimatePresence>
 
               <div className="flex items-center justify-center gap-4 mt-6">
-                <button onClick={prevMobile} aria-label="Previous" className="w-9 h-9 rounded-full bg-[var(--bg-surface)] border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-purple-400 transition-all duration-200">◀</button>
+                <NavButton onClick={prevMobile} label="Previous"><ChevronLeft size={18} /></NavButton>
                 <div className="flex items-center gap-2">
                   {TESTIMONIALS.map((_, i) => (
-                    <button key={i} onClick={() => { setMobileDir(i > mobileIdx ? 1 : -1); setMobileIdx(i); }} aria-label={`Testimonial ${i + 1}`}
+                    <button
+                      key={i}
+                      onClick={() => { setMobileDir(i > mobileIdx ? 1 : -1); setMobileIdx(i); }}
+                      aria-label={`Testimonial ${i + 1}`}
                       className={`rounded-full transition-all duration-300 ${i === mobileIdx ? 'w-5 h-2 bg-gradient-to-r from-purple-400 to-pink-400' : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-purple-400/50'}`}
                     />
                   ))}
                 </div>
-                <button onClick={nextMobile} aria-label="Next" className="w-9 h-9 rounded-full bg-[var(--bg-surface)] border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-purple-400 transition-all duration-200">▶</button>
+                <NavButton onClick={nextMobile} label="Next"><ChevronRight size={18} /></NavButton>
               </div>
             </div>
 
-            {/* Desktop: 3 cards per page, entire group swaps at once */}
+            {/* Desktop */}
             <div className="hidden lg:block mb-8">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
@@ -185,36 +199,19 @@ export default function Testimonials() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Desktop navigation — 2 page dots */}
               <div className="flex items-center justify-center gap-4 mt-8">
-                <button
-                  onClick={prevPage}
-                  aria-label="Previous page"
-                  className="w-10 h-10 rounded-full bg-[var(--bg-surface)] border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-purple-400 transition-all duration-200"
-                >
-                  ◀
-                </button>
+                <NavButton onClick={prevPage} label="Previous page"><ChevronLeft size={18} /></NavButton>
                 <div className="flex items-center gap-2">
                   {Array.from({ length: totalPages }).map((_, i) => (
                     <button
                       key={i}
                       onClick={() => goToPage(i)}
                       aria-label={`Page ${i + 1}`}
-                      className={`rounded-full transition-all duration-300 ${
-                        i === page
-                          ? 'w-6 h-2 bg-gradient-to-r from-purple-400 to-pink-400'
-                          : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-purple-400/50'
-                      }`}
+                      className={`rounded-full transition-all duration-300 ${i === page ? 'w-6 h-2 bg-gradient-to-r from-purple-400 to-pink-400' : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-purple-400/50'}`}
                     />
                   ))}
                 </div>
-                <button
-                  onClick={nextPage}
-                  aria-label="Next page"
-                  className="w-10 h-10 rounded-full bg-[var(--bg-surface)] border border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-purple-400 transition-all duration-200"
-                >
-                  ▶
-                </button>
+                <NavButton onClick={nextPage} label="Next page"><ChevronRight size={18} /></NavButton>
               </div>
             </div>
 
