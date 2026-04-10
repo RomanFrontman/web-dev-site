@@ -45,20 +45,24 @@ const About = () => {
                   {/* Stats */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-purple-400 mb-1">  <AnimatedCounter target={30} />+</div>
-                      <div className="text-gray-500 dark:text-gray-300 text-sm">Projects</div>
+                      <div className="text-2xl font-bold text-purple-400 mb-1"><AnimatedCounter target={50} />+</div>
+                      <div className="text-xs font-semibold text-gray-700 dark:text-gray-200 mb-0.5">WordPress Landings</div>
+                      <div className="text-gray-500 dark:text-gray-400 text-[11px] leading-snug">Niches from e-commerce to personal brand</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-pink-400 mb-1">  <AnimatedCounter target={4} />+</div>
-                      <div className="text-gray-500 dark:text-gray-300 text-sm">Years</div>
+                      <div className="text-2xl font-bold text-pink-400 mb-1"><AnimatedCounter target={70} />%</div>
+                      <div className="text-xs font-semibold text-gray-700 dark:text-gray-200 mb-0.5">Repeat Clients</div>
+                      <div className="text-gray-500 dark:text-gray-400 text-[11px] leading-snug">Clients who come back speak louder than words</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-400 mb-1">  <AnimatedCounter target={100} />%</div>
-                      <div className="text-gray-500 dark:text-gray-300 text-sm">Quality</div>
+                      <div className="text-2xl font-bold text-blue-400 mb-1"><AnimatedCounter target={4.9} /> ★</div>
+                      <div className="text-xs font-semibold text-gray-700 dark:text-gray-200 mb-0.5">Average Rating</div>
+                      <div className="text-gray-500 dark:text-gray-400 text-[11px] leading-snug">Based on 47 verified client reviews</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-green-400 mb-1">  <AnimatedCounter target={24} />/7</div>
-                      <div className="text-gray-500 dark:text-gray-300 text-sm">Support</div>
+                      <div className="text-2xl font-bold text-green-400 mb-1"><AnimatedCounter target={3} /> Wks</div>
+                      <div className="text-xs font-semibold text-gray-700 dark:text-gray-200 mb-0.5">Avg. Delivery</div>
+                      <div className="text-gray-500 dark:text-gray-400 text-[11px] leading-snug">On time, every time — or we talk it through</div>
                     </div>
                   </div>
                 </div>
