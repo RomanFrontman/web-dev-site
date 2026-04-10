@@ -9,7 +9,7 @@ const TESTIMONIALS = [
     title: 'Director, Connective Technologies',
     country: '🇬🇧 United Kingdom',
     quote:
-      'Roman delivered a polished corporate website on WordPress with Elementor and ACF. The SEO setup was thorough, pages load instantly, and the layout reflects exactly the professional image we needed. Communication was clear throughout and he met every deadline.',
+      'Honestly wasn\'t sure what to expect hiring remotely, but Roman exceeded every expectation. He took our brief, asked exactly the right questions on day one, and just got on with it. The WordPress site came back clean, fast, and ranked well out of the gate. We\'ve had zero issues since launch.',
     image: 'https://randomuser.me/api/portraits/men/26.jpg',
   },
   {
@@ -17,7 +17,7 @@ const TESTIMONIALS = [
     title: 'UX Designer, Freelance',
     country: '🇮🇹 Italy',
     quote:
-      'I needed a portfolio that felt modern and made a strong first impression. Roman built it with React, Tailwind, and Framer Motion — dark mode, smooth animations, fully responsive. It\'s exactly what I envisioned and I\'ve already landed new clients through it.',
+      'The portfolio Roman built for me is exactly what I wanted — clean React with Framer Motion animations, dark mode, fully responsive. I sent him a rough Figma mockup and he turned it into working code faster than I expected. Two clients reached out through the site within the first month.',
     image: 'https://randomuser.me/api/portraits/women/22.jpg',
   },
   {
@@ -25,7 +25,7 @@ const TESTIMONIALS = [
     title: 'Owner, CleanClin',
     country: '🇺🇦 Ukraine',
     quote:
-      'Roman built our cleaning company website from scratch on WordPress — multiple service pages, Elementor layouts, ACF fields, and proper SEO. Within two months of launch we were getting calls directly from Google search. Absolutely worth every hryvnia.',
+      'We\'re a small cleaning company — I had a tight budget and wasn\'t sure if a proper website was worth it. Roman talked me through what actually matters for local SEO, built us a solid WordPress site with Elementor and ACF, and within two months we were showing up on the first page of Google. It paid for itself quickly.',
     image: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   {
@@ -33,15 +33,15 @@ const TESTIMONIALS = [
     title: 'Founder, LaunchPad Finance',
     country: '🇺🇸 United States',
     quote:
-      'We needed a high-converting landing page for our online finance courses — fast, mobile-friendly, and visually sharp. Roman built it with Bootstrap, JavaScript, and SCSS. Clean code, no bloat, launched on schedule, and our sign-up rate improved noticeably.',
+      'Good landing page developer — rare find. Gave him a conversion-focused brief for our finance course launch and he delivered with Bootstrap and vanilla JS, no unnecessary frameworks. Page speed score was 96 on mobile. Sign-up rate beat our previous landing by a meaningful margin.',
     image: 'https://randomuser.me/api/portraits/men/52.jpg',
   },
   {
     name: 'Vasyl Bondarenko',
-    title: 'CEO, CR Real Estate',
+    title: 'CEO, RomanChaus Real Estate',
     country: '🇺🇦 Ukraine',
     quote:
-      'Roman built our property sales platform on WordPress with ACF, SCSS, and custom filtering by district, price, and type. The site handles a large catalogue without slowing down. Our agents love the admin interface and clients find it very intuitive.',
+      'We needed more than a brochure site — a real catalogue with filtering by district, price range, and property type. Roman built it all in WordPress with custom ACF fields and SCSS. Our agents stopped calling to ask how to update listings on day one. The admin side is that intuitive.',
     image: 'https://randomuser.me/api/portraits/men/31.jpg',
   },
   {
@@ -49,7 +49,7 @@ const TESTIMONIALS = [
     title: 'Owner, Merlion Veterinary Clinic',
     country: '🇺🇦 Ukraine',
     quote:
-      'Roman created a full WordPress website for our clinic with Elementor, ACF, and a personal account system for pet owners. Clients can log in, view records, and book appointments. The design is warm and professional — our clients feel right at home.',
+      'I came to Roman with a very specific request — a clinic website where pet owners can log in and see their animal\'s visit history and book again. He built it in WordPress with Elementor and a custom user dashboard. My clients love it. Several have mentioned it\'s one of the most thoughtful things we\'ve done for them.',
     image: 'https://randomuser.me/api/portraits/women/68.jpg',
   },
 ];

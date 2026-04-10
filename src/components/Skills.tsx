@@ -86,8 +86,8 @@ function SkillCard({ skill, index, selected, onSelect }: SkillCardProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
         onClick={onSelect}
-        className={`bg-[var(--bg-surface)] backdrop-blur-md rounded-xl p-5 border cursor-pointer
-          transition-all duration-300 hover:scale-105          ${selected
+        className={`bg-[var(--bg-surface)] backdrop-blur-md rounded-xl p-4 sm:p-5 border cursor-pointer
+          transition-all duration-300 hover:scale-105 active:scale-[0.97]          ${selected
             ? 'border-purple-400/70 ring-2 ring-purple-400/25'
             : 'border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-purple-400/50 hover:ring-2 hover:ring-purple-400/20'
           }`}
@@ -158,18 +158,19 @@ function ToolCard({ tool, index, selected, onSelect, description }: ToolCardProp
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.06 }}
         onClick={onSelect}
-        className={`bg-[var(--bg-surface)] backdrop-blur-md rounded-xl p-4 border cursor-pointer
-          transition-all duration-300 hover:scale-105 text-center          ${selected
+        className={`bg-[var(--bg-surface)] backdrop-blur-md rounded-xl p-3 sm:p-4 border cursor-pointer
+          transition-all duration-300 hover:scale-105 active:scale-[0.97] text-center
+          min-h-[72px] sm:min-h-[80px] flex flex-col items-center justify-center          ${selected
             ? 'border-pink-400/70 ring-2 ring-pink-400/25'
             : 'border-[oklch(90%_0.012_349)] dark:border-white/10 hover:border-pink-400/50 hover:ring-2 hover:ring-pink-400/20'
           }`}
       >
-        <div className="flex items-center justify-center h-9 mb-2">
+        <div className="flex items-center justify-center h-8 sm:h-9 mb-1.5 sm:mb-2">
           {(TECH_ICONS[tool.icon ?? ''] || TECH_ICONS[tool.name])
-            ? <TechIcon name={TECH_ICONS[tool.icon ?? ''] ? tool.icon! : tool.name} size={30} />
-            : <span className="text-2xl">{tool.icon}</span>}
+            ? <TechIcon name={TECH_ICONS[tool.icon ?? ''] ? tool.icon! : tool.name} size={28} />
+            : <span className="text-xl sm:text-2xl">{tool.icon}</span>}
         </div>
-        <div className="text-xs font-bold text-gray-900 dark:text-white leading-tight">{tool.name}</div>
+        <div className="text-[11px] sm:text-xs font-bold text-gray-900 dark:text-white leading-tight">{tool.name}</div>
       </motion.div>
 
       <AnimatePresence>
@@ -253,11 +254,11 @@ export default function Skills() {
   return (
     <AnimatedSection>
       <section id="skills" className="py-20 relative">
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
 
             <div className="text-center mb-16">
-              <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 Skills & Technologies
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -267,7 +268,7 @@ export default function Skills() {
             </div>
 
             {loading ? (
-              <div className="grid lg:grid-cols-2 gap-12">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
                 {[0, 1].map(col => (
                   <div key={col} className="space-y-4">
                     {[1, 2, 3, 4].map(n => (
@@ -280,7 +281,7 @@ export default function Skills() {
                 ))}
               </div>
             ) : (
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
 
                 {/* ── Left column: proficiency skills ── */}
                 <div className="space-y-2">
@@ -329,7 +330,7 @@ export default function Skills() {
                     return (
                       <div key={cat} className="space-y-3">
                         <CategoryLabel label={cat} />
-                        <div className="grid grid-cols-3 gap-3">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                           {group.map((tool, i) => (
                             <ToolCard
                               key={tool.id}
