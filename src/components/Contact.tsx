@@ -1,9 +1,12 @@
 "use client";
 // src/components/Contact.tsx
 import { useState } from "react";
+import { Resend } from "resend";
 import Button from "./Button";
 import AnimatedSection from "./AnimatedSection";
 import { addMessage } from "../lib/db";
+
+const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -16,20 +19,30 @@ const Contact = () => {
     e.preventDefault();
     setStatus("loading");
     try {
-      const res = await fetch("https://formsubmit.co/roman1997lviv@gmail.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({ name, email, message, _captcha: "false", _template: "box" }),
+      const { error } = await resend.emails.send({
+        from: import.meta.env.VITE_RESEND_FROM,
+        to: [import.meta.env.VITE_CONTACT_EMAIL],
+        replyTo: email,
+        subject: `New message from ${name}`,
+        html: `
+          <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
+            <h2 style="color:#a855f7">New Contact Form Submission</h2>
+            <table style="width:100%;border-collapse:collapse">
+              <tr><td style="padding:8px 0;color:#6b7280;width:80px">Name</td><td style="padding:8px 0;font-weight:600">${name}</td></tr>
+              <tr><td style="padding:8px 0;color:#6b7280">Email</td><td style="padding:8px 0"><a href="mailto:${email}" style="color:#a855f7">${email}</a></td></tr>
+            </table>
+            <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0">
+            <p style="color:#6b7280;margin:0 0 8px">Message</p>
+            <p style="white-space:pre-wrap;margin:0">${message}</p>
+          </div>
+        `,
       });
-      if (res.ok) {
-        addMessage({ name, email, message }).catch(err => console.error('Failed to save message to Supabase:', err));
-        setStatus("success");
-      } else {
+      if (error) {
         setStatus("error");
+        return;
       }
+      addMessage({ name, email, message }).catch(err => console.error("Failed to save message:", err));
+      setStatus("success");
     } catch {
       setStatus("error");
     }
