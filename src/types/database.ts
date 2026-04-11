@@ -43,3 +43,23 @@ export interface Page {
   is_published: boolean;
   updated_at: string;
 }
+
+export interface PricingPlan {
+  id: string;
+  name: string;
+  price: number;
+  features: string[];
+  gradient: string;
+  order: number;
+  created_at: string;
+}
+
+export interface PricingOption {
+  id: string;
+  key: string;
+  label: string;
+  price: number;
+  step: number;       // 1=Website Type, 2=Design, 3=Admin Panel, 4=Features, 5=Deadline
+  order: number;
+  created_at: string;
+}

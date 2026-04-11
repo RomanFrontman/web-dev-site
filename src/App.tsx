@@ -24,6 +24,7 @@ import AdminSkills from './admin/AdminSkills';
 import AdminToolchain from './admin/AdminToolchain';
 import AdminMessages from './admin/AdminMessages';
 import AdminPages from './admin/AdminPages';
+import AdminPricing from './admin/AdminPricing';
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
         <Route path="toolchain"  element={<AdminToolchain />} />
         <Route path="messages"   element={<AdminMessages />} />
         <Route path="pages"     element={<AdminPages />} />
+        <Route path="pricing"   element={<AdminPricing />} />
       </Route>
     </Routes>
   );

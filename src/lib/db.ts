@@ -1,6 +1,6 @@
 // src/lib/db.ts
 import { supabase } from './supabase';
-import type { Project, Skill, Message, Page } from '../types/database';
+import type { Project, Skill, Message, Page, PricingPlan, PricingOption } from '../types/database';
 
 // ── Projects ─────────────────────────────────────────────────
 
@@ -204,4 +204,55 @@ export async function deletePage(id: string): Promise<void> {
     .delete()
     .eq('id', id);
   if (error) throw error;
+}
+
+// ── Pricing Plans ─────────────────────────────────────────────
+
+export async function getPricingPlans(): Promise<PricingPlan[]> {
+  const { data, error } = await supabase
+    .from('pricing_plans')
+    .select('*')
+    .order('order', { ascending: true });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function updatePricingPlan(
+  id: string,
+  data: Partial<Omit<PricingPlan, 'id' | 'created_at'>>
+): Promise<PricingPlan> {
+  const { data: row, error } = await supabase
+    .from('pricing_plans')
+    .update(data)
+    .eq('id', id)
+    .select()
+    .single();
+  if (error) throw error;
+  return row;
+}
+
+// ── Pricing Options (Calculator) ──────────────────────────────
+
+export async function getPricingOptions(): Promise<PricingOption[]> {
+  const { data, error } = await supabase
+    .from('pricing_options')
+    .select('*')
+    .order('step', { ascending: true })
+    .order('order', { ascending: true });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function updatePricingOption(
+  id: string,
+  data: Partial<Omit<PricingOption, 'id' | 'created_at'>>
+): Promise<PricingOption> {
+  const { data: row, error } = await supabase
+    .from('pricing_options')
+    .update(data)
+    .eq('id', id)
+    .select()
+    .single();
+  if (error) throw error;
+  return row;
 }

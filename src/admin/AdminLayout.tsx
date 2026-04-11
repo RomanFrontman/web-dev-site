@@ -19,6 +19,7 @@ const NAV_ITEMS = [
   { icon: '🛠️', label: 'Toolchain', path: '/admin/toolchain' },
   { icon: '✉️', label: 'Messages',  path: '/admin/messages'  },
   { icon: '📄', label: 'Pages',     path: '/admin/pages'     },
+  { icon: '💰', label: 'Pricing',   path: '/admin/pricing'   },
 ];
 
 const PAGE_TITLES: Record<string, string> = {
@@ -28,6 +29,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/admin/toolchain': 'Toolchain',
   '/admin/messages':  'Messages',
   '/admin/pages':     'Pages',
+  '/admin/pricing':   'Pricing',
 };
 
 export default function AdminLayout() {
